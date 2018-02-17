@@ -1,0 +1,51 @@
+#gitar {
+  height: 300px;
+}
+
+#gitar-neck {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  height: inherit;
+}
+
+.string {
+  height: 50px;
+  background-color: #efefef;
+  background-image: url(bg-string.png);
+  background-position: center;
+  background-repeat: repeat-x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.string-name {
+  background-color: #333;
+  width: 25px;
+  color: #fff;
+  height: inherit;
+}
+
+.note {
+  flex-grow: 1;
+  text-align: center;
+  justify-content: center;
+  line-height: 50px;
+  border-right: 1px solid #000;
+}
+
+.third {
+  background-color: red;
+}
+
+.note-label {
+  display: inline-block;
+  width: 40px;
+  height: inherit;
+  font-size: .8em;
+}
+
+#gitar-controls {
+  border-bottom: 1px solid #000;
+  height: 50px
+}
