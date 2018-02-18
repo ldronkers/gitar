@@ -54,13 +54,13 @@
 
 #controller {
   border-bottom: 1px solid #000;
-  height: 50px;
   display: flex;
   flex-direction: row;
 }
 
 #controller .interval-button {
   flex-grow: 1;
+  padding: 5px;
 }
 
 #controller .interval {
@@ -68,6 +68,8 @@
   border-radius: 23px;
   border: 1px solid grey;
   width: 30px;
+  height: 30px;
+  line-height: 30px;
   text-align: center;
 }
 
