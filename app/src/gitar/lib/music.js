@@ -35,10 +35,16 @@ export class Music {
     return this._notes[index]
   }
 
+  /**
+  * Get notes for string E (index)
+  * But as string start with the followin (E => F)
+  * the first element is 'sliced'
+  */
   getStringNotes(index) {
-    const start_notes = this._notes.slice(index, 12)
-    const following_notes = this._notes.slice(0, index)
-    return start_notes.concat(following_notes)
+    const keyNnotes = this._notes.slice(index, 12)
+    const prependingNotes = this._notes.slice(0, index)
+    const notes = keyNnotes.concat(prependingNotes, [this._notes[index]])
+    return notes.slice(1);
   }
 }
 
