@@ -5,7 +5,7 @@ class String extends Component {
     handleNotes(notes) {
       return(
         this.props.notes.map((item, index) => (
-          <Note
+          <Note key={item.id}
             name={item.displayName}
             className={item.class}
             onClicked={(name)=>{this.props.handleAction(item.id)}}>
