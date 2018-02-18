@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import String from './string';
+import { Music, MusicNote } from './lib/music.js';
 
 class Gitar extends Component {
     constructor() {
       super()
-      const notes = [
+      const music = new Music([
           {minute: 0, id: 0, name: 'C', displayName: 'C', class: ''},
           {minute: 7, id: 1, name: 'Db', displayName: 'C#/Db', class: ''},
           {minute: 2, id: 2, name: 'D', displayName: 'D', class: ''},
@@ -17,46 +18,21 @@ class Gitar extends Component {
           {minute: 3, id: 9, name: 'A', displayName: 'A', class: ''},
           {minute: 10, id: 10, name: 'Bb', displayName: 'A#/Bb', class: ''},
           {minute: 5, id: 11, name: 'B', displayName: 'B', class: ''}
-      ]
-      this.notes = notes;
-      this.state = {notes:notes};
+      ])
+      this.music = music;
+      this.state = {notes: music.notes};
     }
 
-    getStringNotes(index) {
-      const start_notes = this.state.notes.slice(index, 12)
-      const following_notes = this.state.notes.slice(0, index)
-      return start_notes.concat(following_notes)
-    }
-
-    handleAction(note) {
-      const third = this.getInterval(note, 3)
-      third.class = 'interval'
-      note.class = 'root'
+    handleAction(clickedNote) {
+      const intervalNote = this.music.getInterval(clickedNote, 3)
+      intervalNote.class = 'interval'
+      clickedNote.class = 'root'
       let notes = this.state.notes.slice()
       this.setState({notes:notes});
     }
 
-    getInterval(note, interval) {
-      //+4==3rd
-      //+3==b3rd
-      //+7==5th
-      //+10==7th
-      //+11==octave
-      const index = this.getIndex(note.id + interval)
-      return this.notes[index]
-    }
-
-    getIndex(desiredIndex) {
-      const highestIndex = this.state.notes.length -1;
-      if (desiredIndex > highestIndex) {
-        const beginninIndex = (desiredIndex - highestIndex) -1
-        return beginninIndex // go round the other way, fromthe start
-      }
-      return desiredIndex;
-    }
-
     renderString(index) {
-      const stringNotes = this.getStringNotes(index)
+      const stringNotes = this.music.getStringNotes(index)
       return (
         <String
           name={this.state.notes[index].name}
@@ -69,12 +45,12 @@ class Gitar extends Component {
         return(
             <div id="gitar">
               <div id="gitar-neck">
-                {this.renderString(4)}
-                {this.renderString(11)}
-                {this.renderString(7)}
-                {this.renderString(2)}
-                {this.renderString(9)}
-                {this.renderString(4)}
+                {this.renderString(MusicNote.E)}
+                {this.renderString(MusicNote.B)}
+                {this.renderString(MusicNote.G)}
+                {this.renderString(MusicNote.D)}
+                {this.renderString(MusicNote.A)}
+                {this.renderString(MusicNote.E)}
               </div>
               <div id="gitar-controls"></div>
             </div>

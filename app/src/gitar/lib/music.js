@@ -1,34 +1,47 @@
-function MusicNote(id, name, pitch = '', display_name = '') {
-  this.id = id;
-  this.name = name;
-  this.pitch = pitch;
-  this.display_name = display_name ? display_name : name;
+export class Music {
+
+  constructor(notes) {
+    this._notes = notes;
+  }
+
+  get notes() {
+    return this._notes;
+  }
+
+  set notes(notes) {
+    this._notes = notes
+  }
+
+  getIndex(desiredIndex) {
+    const highestIndex = this._notes.length -1;
+    if (desiredIndex > highestIndex) {
+      const beginninIndex = (desiredIndex - highestIndex) -1
+      return beginninIndex // go round the other way, fromthe start
+    }
+    return desiredIndex;
+  }
+
+  //+4==3rd
+  //+3==b3rd
+  //+7==5th
+  //+10==7th
+  //+11==octave
+  getInterval(note, interval) {
+    const index = this.getIndex(note.id + interval)
+    return this._notes[index]
+  }
+
+  getStringNotes(index) {
+    const start_notes = this._notes.slice(index, 12)
+    const following_notes = this._notes.slice(0, index)
+    return start_notes.concat(following_notes)
+  }
 }
 
-new MusicNote(1, 'c'),
-new MusicNote(1, 'd', 'flat'),
-new MusicNote(2, 'd'),
-new MusicNote(3, 'e', 'flat'),
-new MusicNote(4, 'e'),
-new MusicNote(5, 'f'),
-new MusicNote(6, 'g', 'flat'),
-new MusicNote(7, 'g'),
-new MusicNote(8, 'a', 'flat'),
-new MusicNote(9, 'a'),
-new MusicNote(10, 'b', 'flat'),
-new MusicNote(11, 'b')
-
-var notes = [
-  'c',
-  'c#',
-  'd',
-  'd#',
-  'e',
-  'f',
-  'f#',
-  'g',
-  'g#',
-  'a',
-  'a#',
-  'b']
-this.notes = notes;
+export class MusicNote {
+  static E = '4';
+  static B = '11';
+  static G = '7';
+  static D = '2';
+  static A = '9';
+}
