@@ -6,9 +6,10 @@ class String extends Component {
       return(
         this.props.notes.map((item, index) => (
           <Note key={item.id}
-            name={item.displayName}
-            className={item.class}
-            onClicked={(name)=>{this.props.handleAction(item.id)}}>
+            selectedNote={this.props.selectedNote}
+            intervalNote={this.props.intervalNote}
+            note={item}
+            onClicked={(id)=>{this.props.handleAction(item.id)}}>
           </Note>
         ))
       )

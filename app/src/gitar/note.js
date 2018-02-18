@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 
 class Note extends Component {
+    getClassName() {
+      let result = 'note';//+ this.props.note.class
+      if (this.props.selectedNote
+        && (this.props.selectedNote.id === this.props.note.id)) {
+        result += ' root';
+      } else if (this.props.intervalNote &&
+        (this.props.intervalNote.id === this.props.note.id)) {
+        result += ' interval'
+      }
+      return result;
+    }
+
     render(){
         return(
             <div
-              className={'note ' + this.props.className}
-              onClick={()=>{this.props.onClicked(this.props.name)}}>
+              className={this.getClassName()}
+              onClick={(id)=>{this.props.onClicked(this.props.note.id)}}>
               <span
-                className="note-label">{this.props.name}
+                className="note-label">{this.props.note.displayName}
               </span>
             </div>
         );

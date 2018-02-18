@@ -7,23 +7,30 @@ class Gitar extends Component {
     constructor() {
       super()
       this.music = new Music(MusicNote.getNotes());
-      this.interval = MusicInterval.PER_UNI;
+      this.selectedInterval = MusicInterval.PER_UNI;
       this.state = {
         notes: this.music.notes,
-        interval: this.interval
+        interval: this.selectedInterval
       };
     }
 
     setInterval(interval) {
-      this.setState({interval:interval})
-      this.interval = interval;
+      this.selectedInterval = interval;
+      this.setState({interval:interval});
+      if (this.selectedNote) {
+        this.setNotes(this.selectedNote);
+      }
     }
 
-    handleAction(clickedNote) {
-      const intervalNote = this.music.getInterval(clickedNote, this.interval.semitones)
-      intervalNote.class = 'interval'
-      clickedNote.class = 'root'
-      let notes = this.state.notes.slice()
+    setNotes(clickedNote) {
+      this.selectedNote = clickedNote;
+      this.intervalNote = this.music.getInterval(
+        clickedNote, this.selectedInterval.semitones
+      );
+
+      let notes = MusicNote.getNotes(); 
+      notes[this.intervalNote.id] = this.intervalNote;
+      notes[clickedNote.id] = clickedNote;
       this.setState({notes:notes});
     }
 
@@ -32,8 +39,10 @@ class Gitar extends Component {
       return (
         <String
           name={this.state.notes[index].name}
+          selectedNote={this.selectedNote}
+          intervalNote={this.intervalNote}
           notes={stringNotes}
-          handleAction={(id)=>{this.handleAction(this.state.notes[id])}}>
+          handleAction={(id)=>{this.setNotes(this.state.notes[id])}}>
         </String>
       )
     }
@@ -51,7 +60,7 @@ class Gitar extends Component {
               </div>
                 <Controller
                   intervals={MusicInterval.getIntervals()}
-                  selectedInterval={this.interval}
+                  selectedInterval={this.selectedInterval}
                   handleAction={(interval)=>{this.setInterval(interval)}}
                   />
             </div>
