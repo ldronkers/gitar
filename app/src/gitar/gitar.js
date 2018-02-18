@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import String from './string';
-import { Music, MusicNote } from './lib/music.js';
+import Controller from './controller/controller'
+import { Music, MusicNote, MusicInterval } from './lib/music.js';
 
 class Gitar extends Component {
     constructor() {
       super()
+
       const music = new Music([
           {minute: 0, id: 0, name: 'C', displayName: 'C', class: ''},
           {minute: 7, id: 1, name: 'Db', displayName: 'C#/Db', class: ''},
@@ -19,12 +21,22 @@ class Gitar extends Component {
           {minute: 10, id: 10, name: 'Bb', displayName: 'A#/Bb', class: ''},
           {minute: 5, id: 11, name: 'B', displayName: 'B', class: ''}
       ])
+      
       this.music = music;
-      this.state = {notes: music.notes};
+      this.interval = MusicInterval.PER_UNI;
+      this.state = {
+        notes: music.notes,
+        interval: this.interval
+      };
+    }
+
+    setInterval(interval) {
+      this.setState({interval:interval})
+      this.interval = interval;
     }
 
     handleAction(clickedNote) {
-      const intervalNote = this.music.getInterval(clickedNote, 3)
+      const intervalNote = this.music.getInterval(clickedNote, this.interval.semitones)
       intervalNote.class = 'interval'
       clickedNote.class = 'root'
       let notes = this.state.notes.slice()
@@ -41,6 +53,7 @@ class Gitar extends Component {
         </String>
       )
     }
+
     render(){
         return(
             <div id="gitar">
@@ -52,7 +65,11 @@ class Gitar extends Component {
                 {this.renderString(MusicNote.A)}
                 {this.renderString(MusicNote.E)}
               </div>
-              <div id="gitar-controls"></div>
+                <Controller
+                  intervals={MusicInterval.getIntervals()}
+                  selectedInterval={this.interval}
+                  handleAction={(interval)=>{this.setInterval(interval)}}
+                  />
             </div>
         );
     }

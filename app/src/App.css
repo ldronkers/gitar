@@ -8,7 +8,7 @@
   height: inherit;
 }
 
-.string {
+#gitar-neck .string {
   height: 40px;
   background-color: #efefef;
   background-image: url(bg-string.png);
@@ -19,7 +19,7 @@
   justify-content: flex-start;
 }
 
-.string-name {
+#gitar-neck .string-name {
   background-color: #333;
   width: 25px;
   color: #fff;
@@ -27,7 +27,7 @@
   line-height: 40px;
 }
 
-.note {
+#gitar-neck .note {
   flex-grow: 1;
   text-align: center;
   font-weight: bold;
@@ -36,23 +36,42 @@
   border-right: 1px solid #000;
 }
 
-.interval {
+#gitar-neck .interval {
   background-color: red;
 }
 
-.root {
+#gitar-neck .root {
   background-color: grey;
   color: white;
 }
 
-.note-label {
+#gitar-neck .note-label {
   display: inline-block;
   width: 40px;
   height: inherit;
   font-size: .8em;
 }
 
-#gitar-controls {
+#controller {
   border-bottom: 1px solid #000;
-  height: 50px
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+#controller .interval-button {
+  flex-grow: 1;
+}
+
+#controller .interval {
+  display: block;
+  border-radius: 23px;
+  border: 1px solid grey;
+  width: 30px;
+  text-align: center;
+}
+
+#controller .interval.selected {
+  background-color: black;
+  color: white;
 }
