@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Note extends Component {
     getClassName() {
-      let result = 'note';//+ this.props.note.class
+      let result = 'note';
       if (this.props.selectedNote
         && (this.props.selectedNote.id === this.props.note.id)) {
         result += ' root';
