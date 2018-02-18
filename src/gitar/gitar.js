@@ -29,19 +29,20 @@ class Gitar extends Component {
     }
 
     handleAction(note) {
-      const third = this.getThird(note)
-      third.class = 'third'
+      const third = this.getInterval(note, 3)
+      third.class = 'interval'
+      note.class = 'root'
       let notes = this.state.notes.slice()
       this.setState({notes:notes});
     }
 
-    getThird(note) {
+    getInterval(note, interval) {
       //+4==3rd
       //+3==b3rd
       //+7==5th
       //+10==7th
       //+11==octave
-      const index = this.getIndex(note.id + 3)
+      const index = this.getIndex(note.id + interval)
       return this.notes[index]
     }
 
@@ -49,7 +50,7 @@ class Gitar extends Component {
       const highestIndex = this.state.notes.length -1;
       if (desiredIndex > highestIndex) {
         const beginninIndex = (desiredIndex - highestIndex) -1
-        return beginninIndex// go round the other way, fromthe start
+        return beginninIndex // go round the other way, fromthe start
       }
       return desiredIndex;
     }
