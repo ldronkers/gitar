@@ -1,4 +1,8 @@
-interactive guitar neck called gitar
+# Gitar
+Interactive guitar neck called gitar
+
+![Gitar screenshot](https://raw.githubusercontent.com/ldronkers/gitar/master/gitar0-0-1.png)
+
 
 # Build and run
 $ docker build -t gitar .
