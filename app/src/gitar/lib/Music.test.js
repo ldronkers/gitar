@@ -7,7 +7,7 @@ test('get index with index in range', () => {
   const interval = MusicInterval.PER_5TH;
 
   expect(
-    music.getInterval(
-      notes[MusicNote.E], interval.semitones
+    music.getIntervalNote(
+      notes[MusicNote.E], interval
     )).toBe(notes[11]);
 });

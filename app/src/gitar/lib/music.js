@@ -30,8 +30,8 @@ class Music {
   * +7==5th
   * See MusicInterval
   */
-  getInterval(note, semitones) {
-    const index = this.getIndex(note.id + semitones)
+  getIntervalNote(note, interval) {
+    const index = this.getIndex(note.id + interval.semitones)
     return this._notes[index]
   }
 
