@@ -1,4 +1,4 @@
-export class Music {
+class Music {
 
   constructor(notes) {
     this._notes = notes;
@@ -48,7 +48,7 @@ export class Music {
   }
 }
 
-export class MusicNote {
+class MusicNote {
   static E = '4';
   static B = '11';
   static G = '7';
@@ -73,7 +73,7 @@ export class MusicNote {
   }
 }
 
-export class MusicInterval {
+class MusicInterval {
   static PER_UNI = {semitones: 0, name: 'Perfect uninison', shortName: '1st'};
   static AUG_UNI = {semitones: 1, name: 'Augmented uninison', shortName: '#1'};
 
@@ -132,3 +132,5 @@ export class MusicInterval {
     ]
   }
 }
+
+export { Music ,MusicNote, MusicInterval };

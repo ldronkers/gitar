@@ -28,7 +28,7 @@ class Gitar extends Component {
         clickedNote, this.selectedInterval.semitones
       );
 
-      let notes = MusicNote.getNotes(); 
+      let notes = MusicNote.getNotes();
       notes[this.intervalNote.id] = this.intervalNote;
       notes[clickedNote.id] = clickedNote;
       this.setState({notes:notes});
