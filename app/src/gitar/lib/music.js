@@ -8,15 +8,11 @@ class Music {
     return this._notes;
   }
 
-  set notes(notes) {
-    this._notes = notes
-  }
-
   getIndex(desiredIndex) {
     const highestIndex = this._notes.length -1;
     if (desiredIndex > highestIndex) {
       const beginninIndex = (desiredIndex - highestIndex) -1
-      return beginninIndex // go round the other way, fromthe start
+      return beginninIndex // go round the other way, from the start
     }
     return desiredIndex;
   }
