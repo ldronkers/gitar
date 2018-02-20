@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Note from './note'
+import { NotesMenuItem } from './lib/control'
 
 class String extends Component {
     isInIntervalNotes(note) {
-      const lenght = this.props.intervalNotes.length
+      const lenght = this.props.intervalNotes.length;
       for (let i = 0; i < lenght; i++) {
         if (note.id === this.props.intervalNotes[i].id){
           return true;
@@ -20,7 +21,7 @@ class String extends Component {
             intervalNote={this.props.intervalNote}
             isIntervalNote={this.isInIntervalNotes(note)}
             note={note}
-            onClicked={(id)=>{this.props.handleAction(note.id)}}>
+            onClicked={(note) => {this.props.handleNoteSelection(new NotesMenuItem(note))}}>
           </Note>
         ))
       )

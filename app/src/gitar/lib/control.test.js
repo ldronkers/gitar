@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuItem, ScalesMenuItem, IntervalsMenuItem } from './control'
+import { MenuItem, ScalesMenuItem, IntervalsMenuItem, NotesMenuItem } from './control'
 
 test('get type', () => {
   const item = new MenuItem('scale');
@@ -21,4 +21,10 @@ test('get selection for intervals', () => {
   const selection = {name: 'Ionian'};
   const intervalsItem = new IntervalsMenuItem(selection);
   expect(intervalsItem.selection).toBe(selection);
+});
+
+test('get selection for notes', () => {
+  const selection = 'c';
+  const notesItem = new NotesMenuItem(selection);
+  expect(notesItem.selection).toBe(selection);
 });

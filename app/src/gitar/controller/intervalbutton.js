@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class IntervalButton extends Component {
     isSelected() {
-      return this.props.selectedInterval.shortName === this.props.interval.shortName
+      return this.props.selectedInterval &&
+        this.props.selectedInterval.shortName === this.props.interval.shortName
     }
     render(){
         return(

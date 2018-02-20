@@ -17,7 +17,7 @@ class Note extends Component {
         return(
             <div
               className={this.getClassName()}
-              onClick={(id)=>{this.props.onClicked(this.props.note.id)}}>
+              onClick={(note)=>{this.props.onClicked(this.props.note)}}>
               <span
                 className="note-label">{this.props.note.displayName}
               </span>

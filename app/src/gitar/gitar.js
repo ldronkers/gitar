@@ -9,45 +9,67 @@ class Gitar extends Component {
       super()
       this.music = new Music(MusicNote.getNotes());
 
+      this.selectedNote = null;
+      this.selectedInterval = null
+      this.selectedScale = null;
+      this.selectedIntervalNotes = [] // result of selecting, int or scale
+
       this.state = {
-        selectedInterval: MusicInterval.PER_UNI,
-        selectedNote: {},
-        selectedIntervalNotes: []
+        selectedNote: this.selectedNote,
+        selectedInterval: this.selectedInterval,
+        selectedScale: this.selectedScale,
+        selectedIntervalNotes: this.selectedIntervalNotes,
+        selectedMenuItem: {}, // not sure if we need this
       };
     }
 
-    setNotes(clickedNote) {
-      this.setState({
-        notes:MusicNote.getNotes(),
-        selectedNote: clickedNote
-      });
+    handleMenuSelection(menuItem) {
+      if (menuItem.type === MenuItem.TYPE_NOTE) {
+        this.selectedNote = menuItem.selection;
+
+        if (this.selectedInterval) {
+          this.selectedIntervalNotes = [this.selectedNote].concat(
+            this.music.getIntervalNote(this.selectedNote, this.selectedInterval)
+          )
+        }
+
+        if (this.selectedScale) {
+          const scale = MusicScale.getScale(this.selectedScale.name);
+          this.selectedIntervalNotes = this.music.getIntervalNotes(
+            this.selectedNote, scale.intervals
+          );
+        }
+
+
+      } else if (this.selectedNote &&
+        menuItem.type === MenuItem.TYPE_SCALE && menuItem.selection
+      ) {
+        const scale = MusicScale.getScale(menuItem.selection);
+        this.selectedScale = scale;
+      
+        this.selectedIntervalNotes = this.music.getIntervalNotes(
+          this.selectedNote, scale.intervals
+        );
+        this.selectedInterval = null;
+
+      } else if (this.selectedNote && menuItem.type === MenuItem.TYPE_INTERVAL) {
+        this.selectedInterval = menuItem.selection;
+        this.selectedIntervalNotes = [this.selectedNote].concat(
+          this.music.getIntervalNote(this.selectedNote, menuItem.selection)
+        )
+        this.selectedScale = null;
+      }
+
+      this.updateState()
     }
 
-    handleMenuSelection(menuItem) {
-      if (!this.state.selectedNote || !menuItem.selection){
-        return;
-      }
-
-      if (menuItem.type === MenuItem.TYPE_SCALE) {
-        const scale = MusicScale.getScale(menuItem.selection);
-        const intervalNotes = this.music.getIntervalNotes(
-          this.state.selectedNote, scale.intervals
-        );
-
-        this.setState({
-          selectedIntervalNotes: intervalNotes}
-        );
-
-      } else if (menuItem.type === MenuItem.TYPE_INTERVAL) {
-        const intervalNotes = [this.state.selectedNote].concat(
-          this.music.getIntervalNote(this.state.selectedNote, menuItem.selection)
-        )
-
-        this.setState({
-            selectedIntervalNotes: intervalNotes,
-            selectedInterval: menuItem.selection
-          });
-      }
+    updateState() {
+      this.setState({
+          selectedNote: this.selectedNote,
+          selectedInterval: this.selectedInterval,
+          selectedScale: this.selectedScale,
+          selectedIntervalNotes: this.selectedIntervalNotes,
+        });
     }
 
     renderString(index) {
@@ -58,7 +80,7 @@ class Gitar extends Component {
           selectedNote={this.state.selectedNote}
           intervalNotes={this.state.selectedIntervalNotes}
           notes={stringNotes}
-          handleAction={(id)=>{this.setNotes(this.music.notes[id])}}>
+          handleNoteSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}>
         </String>
       )
     }
