@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import IntervalButton from './intervalbutton'
-import { ScalesMenuItem } from '../lib/control'
+import { ScalesMenuItem, IntervalsMenuItem} from '../lib/control'
 
 class Conroller extends Component {
     handleIntervals(intervals) {
       return (
-        intervals.map((item, index) => (
-          <IntervalButton key={item.shortName}
-            interval={item}
+        intervals.map((interval, index) => (
+          <IntervalButton key={interval.shortName}
+            interval={interval}
             selectedInterval={this.props.selectedInterval}
-            onClicked={(name)=>{this.props.handleAction(item)}}>
+            onClicked={(interval) => {this.props.handleMenuSelection(new IntervalsMenuItem(interval))}}>
           </IntervalButton>
         ))
       )

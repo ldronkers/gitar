@@ -9,54 +9,44 @@ class Gitar extends Component {
       super()
       this.music = new Music(MusicNote.getNotes());
 
-      // selectedIntervalNotes: to replace selectedInterval
-      // three options to be implemented
-      // select an interval a scale, or triad
-      this.selectedIntervalNotes = [];
-      this.selectedInterval = MusicInterval.PER_UNI;
-
       this.state = {
-        notes: this.music.notes,
-        interval: this.selectedInterval,
-        selectedIntervalNotes: this.selectedIntervalNotes
+        selectedInterval: MusicInterval.PER_UNI,
+        selectedNote: {},
+        selectedIntervalNotes: []
       };
     }
 
-    setInterval(interval) {
-      this.selectedInterval = interval;
-      this.setState({interval:interval});
-      if (this.selectedNote) {
-        this.setNotes(this.selectedNote);
-      }
-    }
-
     setNotes(clickedNote) {
-      this.selectedNote = clickedNote;
-      this.intervalNote = this.music.getIntervalNote(
-        clickedNote, this.selectedInterval
-      );
-
-      let notes = MusicNote.getNotes();
-      notes[this.intervalNote.id] = this.intervalNote;
-      notes[clickedNote.id] = clickedNote;
-      this.setState({notes:notes});
+      this.setState({
+        notes:MusicNote.getNotes(),
+        selectedNote: clickedNote
+      });
     }
 
     handleMenuSelection(menuItem) {
-      if (!this.selectedNote || !menuItem.selection){
+      if (!this.state.selectedNote || !menuItem.selection){
         return;
       }
 
       if (menuItem.type === MenuItem.TYPE_SCALE) {
         const scale = MusicScale.getScale(menuItem.selection);
         const intervalNotes = this.music.getIntervalNotes(
-          this.selectedNote, scale.intervals
+          this.state.selectedNote, scale.intervals
         );
-        // figure out which one and how to manage both?
-        this.setState({intervalNotes: intervalNotes});
-        this.selectedIntervalNotes = intervalNotes;
+
+        this.setState({
+          selectedIntervalNotes: intervalNotes}
+        );
+
       } else if (menuItem.type === MenuItem.TYPE_INTERVAL) {
-        // todo: implement
+        const intervalNotes = [this.state.selectedNote].concat(
+          this.music.getIntervalNote(this.state.selectedNote, menuItem.selection)
+        )
+
+        this.setState({
+            selectedIntervalNotes: intervalNotes,
+            selectedInterval: menuItem.selection
+          });
       }
     }
 
@@ -64,12 +54,11 @@ class Gitar extends Component {
       const stringNotes = this.music.getStringNotes(index)
       return (
         <String
-          name={this.state.notes[index].name}
-          selectedNote={this.selectedNote}
-          intervalNote={this.intervalNote}
-          intervalNotes={this.selectedIntervalNotes}
+          name={this.music.notes[index].name}
+          selectedNote={this.state.selectedNote}
+          intervalNotes={this.state.selectedIntervalNotes}
           notes={stringNotes}
-          handleAction={(id)=>{this.setNotes(this.state.notes[id])}}>
+          handleAction={(id)=>{this.setNotes(this.music.notes[id])}}>
         </String>
       )
     }
@@ -88,9 +77,8 @@ class Gitar extends Component {
                 <Controller
                   intervals={MusicInterval.getIntervals()}
                   scales={MusicScale.getScales()}
-                  selectedInterval={this.selectedInterval}
+                  selectedInterval={this.state.selectedInterval}
                   handleMenuSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}
-                  handleAction={(interval)=>{this.setInterval(interval)}}
                   />
             </div>
         );
