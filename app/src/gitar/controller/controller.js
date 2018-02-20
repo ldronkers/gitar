@@ -13,11 +13,11 @@ class Conroller extends Component {
         ))
       )
     }
-    
+
     render(){
         return(
             <div id="controller">
-              {this.handleIntervals(this.props.intervals)}
+              <div id="intervals">{this.handleIntervals(this.props.intervals)}</div>
             </div>
         );
     }

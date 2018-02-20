@@ -54,16 +54,19 @@
 
 #controller {
   border-bottom: 1px solid #000;
+}
+
+#intervals {
   display: flex;
   flex-direction: row;
 }
 
-#controller .interval-button {
+#intervals .interval-button {
   flex-grow: 1;
   padding: 5px;
 }
 
-#controller .interval {
+#intervals .interval {
   display: block;
   border-radius: 23px;
   border: 1px solid grey;
@@ -73,7 +76,7 @@
   text-align: center;
 }
 
-#controller .interval.selected {
+#intervals .interval.selected {
   background-color: black;
   color: white;
 }

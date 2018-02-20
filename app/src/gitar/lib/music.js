@@ -129,4 +129,16 @@ class MusicInterval {
   }
 }
 
-export { Music ,MusicNote, MusicInterval };
+class MusicScale {
+  static IONIAN = [
+    MusicInterval.PER_UNI,
+    MusicInterval.MAJ_2ND,
+    MusicInterval.MAJ_3RD,
+    MusicInterval.PER_4TH,
+    MusicInterval.PER_5TH,
+    MusicInterval.MAJ_6TH,
+    MusicInterval.MAJ_7TH
+  ]
+}
+
+export { Music ,MusicNote, MusicInterval, MusicScale };
