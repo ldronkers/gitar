@@ -2,18 +2,30 @@ import React, { Component } from 'react';
 import Note from './note'
 
 class String extends Component {
+    isInIntervalNotes(note) {
+      const lenght = this.props.intervalNotes.length
+      for (let i = 0; i < lenght; i++) {
+        if (note.id === this.props.intervalNotes[i].id){
+          return true;
+        }
+      }
+      return false;
+    }
+
     handleNotes(notes) {
       return(
-        this.props.notes.map((item, index) => (
-          <Note key={item.id}
+        this.props.notes.map((note, index) => (
+          <Note key={note.id}
             selectedNote={this.props.selectedNote}
             intervalNote={this.props.intervalNote}
-            note={item}
-            onClicked={(id)=>{this.props.handleAction(item.id)}}>
+            isIntervalNote={this.isInIntervalNotes(note)}
+            note={note}
+            onClicked={(id)=>{this.props.handleAction(note.id)}}>
           </Note>
         ))
       )
     }
+
     render(){
         return(
             <div className="string">

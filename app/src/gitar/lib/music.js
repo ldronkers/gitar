@@ -8,17 +8,19 @@ class Music {
     return this._notes;
   }
 
-  getIndex(desiredIndex) {
-    const highestIndex = this._notes.length -1;
-    if (desiredIndex > highestIndex) {
-      const beginninIndex = (desiredIndex - highestIndex) -1
-      return beginninIndex // go round the other way, from the start
-    }
-    return desiredIndex;
+  /**
+  * Get the interval notes in relation to the selected note
+  */
+  getIntervalNotes(note, intervals) {
+    const result = []
+    intervals.map((interval, index) => (
+      result.push(this.getIntervalNote(note, interval))
+    ));
+    return result;
   }
 
   /**
-  * Get the interval in relation to the selected note
+  * Get the interval note in relation to the selected note
   *
   * examples:
   * +4==3rd
@@ -41,6 +43,15 @@ class Music {
     const prependingNotes = this._notes.slice(0, index)
     const notes = keyNnotes.concat(prependingNotes, [this._notes[index]])
     return notes.slice(1);
+  }
+
+  getIndex(desiredIndex) {
+    const highestIndex = this._notes.length -1;
+    if (desiredIndex > highestIndex) {
+      const beginninIndex = (desiredIndex - highestIndex) -1
+      return beginninIndex // go round the other way, from the start
+    }
+    return desiredIndex;
   }
 }
 
@@ -130,15 +141,33 @@ class MusicInterval {
 }
 
 class MusicScale {
-  static IONIAN = [
-    MusicInterval.PER_UNI,
-    MusicInterval.MAJ_2ND,
-    MusicInterval.MAJ_3RD,
-    MusicInterval.PER_4TH,
-    MusicInterval.PER_5TH,
-    MusicInterval.MAJ_6TH,
-    MusicInterval.MAJ_7TH
-  ]
+
+  static IONIAN = {
+    name: 'Ionian',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_2ND,
+      MusicInterval.MAJ_3RD,
+      MusicInterval.PER_4TH,
+      MusicInterval.PER_5TH,
+      MusicInterval.MAJ_6TH,
+      MusicInterval.MAJ_7TH
+    ]
+  }
+
+  static getScales() {
+    return [MusicScale.IONIAN];
+  }
+
+  static getScale(name){
+    const scales = MusicScale.getScales();
+    const length = scales.length;
+    for (let i = 0; i < length; i++) {
+      if (scales[i].name === name) {
+        return scales[i];
+      }
+    }
+  }
 }
 
 export { Music ,MusicNote, MusicInterval, MusicScale };

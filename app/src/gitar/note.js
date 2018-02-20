@@ -6,8 +6,8 @@ class Note extends Component {
       if (this.props.selectedNote
         && (this.props.selectedNote.id === this.props.note.id)) {
         result += ' root';
-      } else if (this.props.intervalNote &&
-        (this.props.intervalNote.id === this.props.note.id)) {
+      } else if (this.props.isIntervalNote || (this.props.intervalNote &&
+        (this.props.intervalNote.id === this.props.note.id))) {
         result += ' interval'
       }
       return result;
