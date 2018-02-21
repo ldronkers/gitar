@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Note extends Component {
     getClassName() {
-      let result = 'note';
+      let result = 'note-label';
       if (this.props.selectedNote
         && (this.props.selectedNote.id === this.props.note.id)) {
         result += ' root';
@@ -16,10 +16,10 @@ class Note extends Component {
     render(){
         return(
             <div
-              className={this.getClassName()}
+              className='note'
               onClick={(note)=>{this.props.onClicked(this.props.note)}}>
               <span
-                className="note-label">{this.props.note.displayName}
+                className={this.getClassName()}>{this.props.note.displayName}
               </span>
             </div>
         );

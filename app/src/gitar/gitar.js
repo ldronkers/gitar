@@ -32,7 +32,7 @@ class Gitar extends Component {
             this.music.getIntervalNote(this.selectedNote, this.selectedInterval)
           )
         }
-
+        // or
         if (this.selectedScale) {
           const scale = MusicScale.getScale(this.selectedScale.name);
           this.selectedIntervalNotes = this.music.getIntervalNotes(
@@ -46,7 +46,7 @@ class Gitar extends Component {
       ) {
         const scale = MusicScale.getScale(menuItem.selection);
         this.selectedScale = scale;
-      
+
         this.selectedIntervalNotes = this.music.getIntervalNotes(
           this.selectedNote, scale.intervals
         );

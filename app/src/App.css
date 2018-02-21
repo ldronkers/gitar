@@ -36,12 +36,13 @@
   border-right: 1px solid #000;
 }
 
-#gitar-neck .interval {
-  background-color: red;
+#gitar-neck .note-label.interval {
+  background-color: green;
+  color: white;
 }
 
-#gitar-neck .root {
-  background-color: grey;
+#gitar-neck .note-label.root {
+  background-color: #333;
   color: white;
 }
 
@@ -49,6 +50,7 @@
   display: inline-block;
   width: 40px;
   height: inherit;
+  border-radius: 20px;
   font-size: .8em;
 }
 
