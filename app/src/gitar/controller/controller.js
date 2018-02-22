@@ -30,11 +30,16 @@ class Conroller extends Component {
     render(){
         return(
             <div id="controller">
-              <div id="intervals">
+              <div className="intervals">
                 {this.handleIntervals(this.props.intervals)}
                 </div>
-              <div id="scales">
-                {this.renderScales(this.props.scales)}
+              <div className="scales">
+                <div className="scale-selection">
+                 <span className="scale-selection-label">Scales: </span>{this.renderScales(this.props.scales)}
+                </div>
+                <div className="scale-selection">
+                 <span className="scale-selection-label">Modes: </span>{this.renderScales(this.props.modes)}
+                </div>
               </div>
             </div>
         );

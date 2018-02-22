@@ -58,17 +58,17 @@
   border-bottom: 1px solid #000;
 }
 
-#intervals {
+#controller .intervals {
   display: flex;
   flex-direction: row;
 }
 
-#intervals .interval-button {
+#controller .intervals .interval-button {
   flex-grow: 1;
   padding: 5px;
 }
 
-#intervals .interval {
+#controller .intervals .interval {
   display: block;
   border-radius: 23px;
   border: 1px solid grey;
@@ -78,7 +78,19 @@
   text-align: center;
 }
 
-#intervals .interval.selected {
+#controller .intervals .interval.selected {
   background-color: black;
   color: white;
+}
+
+#controller .scales {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #000;
+  height: 40px;
+}
+
+#controller .scale-selection {
+  flex-grow: 0;
+  padding: 10px;
 }

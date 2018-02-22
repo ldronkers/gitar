@@ -1,5 +1,5 @@
 import React from 'react';
-import { Music, MusicNote, MusicInterval } from './music'
+import { Music, MusicNote, MusicInterval, MusicScale } from './music'
 
 test('test get interval note', () => {
   var notes = MusicNote.getNotes()
@@ -26,4 +26,10 @@ test('get index with index out of bounds', () => {
   const notes = [0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11];
   const music = new Music(notes);
   expect(music.getIndex(20)).toBe(8)
+});
+
+test('get scale Ionian', () => {
+  const mode = {name: 'Ionian', intervals: MusicInterval.MODE_IONIAN}
+  const modes = MusicScale.getScale('Ionian');
+  expect(modes[0]).toBe(mode);
 });

@@ -111,6 +111,16 @@ class MusicInterval {
   static MAJ_7TH = {semitones: 11, name: 'Major seventh', shortName: '7th'};
   static AUG_7TH = {semitones: 12, name: 'Augmented seventh', shortName: 'Oct'};
 
+  static MODE_INTERVALS = [
+    MusicInterval.PER_UNI,
+    MusicInterval.MAJ_2ND,
+    MusicInterval.MAJ_3RD,
+    MusicInterval.PER_4TH,
+    MusicInterval.PER_5TH,
+    MusicInterval.MAJ_6TH,
+    MusicInterval.MAJ_7TH
+  ]
+
   static getIntervals() {
     return [
       MusicInterval.PER_UNI,
@@ -142,7 +152,7 @@ class MusicInterval {
 
 class MusicScale {
 
-  static IONIAN = {
+  static MODE_IONIAN = {
     name: 'Ionian',
     intervals: [
       MusicInterval.PER_UNI,
@@ -153,14 +163,117 @@ class MusicScale {
       MusicInterval.MAJ_6TH,
       MusicInterval.MAJ_7TH
     ]
+  };
+
+  static MODE_DORIAN = {
+    name: 'Dorian',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_2ND,
+      MusicInterval.MIN_3RD,
+      MusicInterval.PER_4TH,
+      MusicInterval.PER_5TH,
+      MusicInterval.MAJ_6TH,
+      MusicInterval.MIN_7TH
+    ]
+  };
+
+  static MODE_PRYGIAN = {
+    name: 'Prygian',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MIN_2ND,
+      MusicInterval.MIN_3RD,
+      MusicInterval.PER_4TH,
+      MusicInterval.PER_5TH,
+      MusicInterval.MIN_6TH,
+      MusicInterval.MIN_7TH
+    ]
+  };
+
+  static MODE_LYDIAN = {
+    name: 'Lydian',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_2ND,
+      MusicInterval.MAJ_3RD,
+      MusicInterval.AUG_4TH,
+      MusicInterval.PER_5TH,
+      MusicInterval.MAJ_6TH,
+      MusicInterval.MAJ_7TH
+    ]
+  };
+
+  static MODE_MIXOLYDIAN = {
+    name: 'Mixolydian',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_2ND,
+      MusicInterval.MAJ_3RD,
+      MusicInterval.PER_4TH,
+      MusicInterval.PER_5TH,
+      MusicInterval.MAJ_6TH,
+      MusicInterval.MIN_7TH
+    ]
+  };
+
+  static MODE_AEOLIAN = {
+    name: 'Aolian',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_2ND,
+      MusicInterval.MIN_3RD,
+      MusicInterval.PER_4TH,
+      MusicInterval.PER_5TH,
+      MusicInterval.MIN_6TH,
+      MusicInterval.MIN_7TH
+    ]
+  };
+
+  static MODE_LOCRIAN = {
+    name: 'Locrian',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MIN_2ND,
+      MusicInterval.MIN_3RD,
+      MusicInterval.PER_4TH,
+      MusicInterval.DIM_5TH,
+      MusicInterval.MIN_6TH,
+      MusicInterval.MIN_7TH
+    ]
+  };
+
+  static MAJOR = {
+    name: 'Major',
+    intervals: MusicScale.MODE_IONIAN.intervals
+  }
+
+  static NATURAL_MINOR = {
+    name: 'Natural minor',
+    intervals: MusicScale.MODE_AEOLIAN.intervals
   }
 
   static getScales() {
-    return [MusicScale.IONIAN];
+    return [
+      MusicScale.MAJOR,
+      MusicScale.NATURAL_MINOR,
+    ];
+  }
+
+  static getModes() {
+    return [
+      MusicScale.MODE_IONIAN,
+      MusicScale.MODE_DORIAN,
+      MusicScale.MODE_PRYGIAN,
+      MusicScale.MODE_LYDIAN,
+      MusicScale.MODE_MIXOLYDIAN,
+      MusicScale.MODE_AEOLIAN,
+      MusicScale.MODE_LOCRIAN
+    ];
   }
 
   static getScale(name){
-    const scales = MusicScale.getScales();
+    const scales = MusicScale.getScales().concat(MusicScale.getModes())
     const length = scales.length;
     for (let i = 0; i < length; i++) {
       if (scales[i].name === name) {

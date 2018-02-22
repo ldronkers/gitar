@@ -99,6 +99,7 @@ class Gitar extends Component {
                 <Controller
                   intervals={MusicInterval.getIntervals()}
                   scales={MusicScale.getScales()}
+                  modes={MusicScale.getModes()}
                   selectedInterval={this.state.selectedInterval}
                   handleMenuSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}
                   />
