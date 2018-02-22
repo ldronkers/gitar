@@ -33,3 +33,19 @@ test('get scale Ionian', () => {
   const scale = MusicScale.getScale('Ionian');
   expect(scale).toEqual(expectedScale);
 });
+
+test('get name', () => {
+  const note = MusicNote.getNote('D');
+  expect(note.name).toEqual('D')
+});
+
+test('get interval notes', () => {
+  const music = new Music(MusicNote.getNotes());
+  const intervals = [MusicInterval.PER_4TH, MusicInterval.PER_5TH];
+  const expectedNotes = [
+    MusicNote.getNote('A'), MusicNote.getNote('B')
+  ];
+  expect(
+    music.getIntervalNotes(MusicNote.getNote('E'), intervals)
+  ).toEqual(expectedNotes)
+});

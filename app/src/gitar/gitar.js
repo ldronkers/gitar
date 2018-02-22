@@ -13,7 +13,7 @@ class Gitar extends Component {
       this.selectedInterval = null
       this.selectedScale = null;
       this.selectedIntervalNotes = [] // result of selecting, int or scale
-
+      
       this.state = {
         selectedNote: this.selectedNote,
         selectedInterval: this.selectedInterval,

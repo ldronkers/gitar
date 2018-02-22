@@ -78,6 +78,16 @@ class MusicNote {
         {minute: 5, id: 11, name: 'B', displayName: 'B'}
     ];
   }
+
+  static getNote(name){
+    const notes = MusicNote.getNotes()
+    const length = notes.length;
+    for (let i = 0; i < length; i++) {
+      if (notes[i].name === name) {
+        return notes[i];
+      }
+    }
+  }
 }
 
 class MusicInterval {
