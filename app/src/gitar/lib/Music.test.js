@@ -29,7 +29,7 @@ test('get index with index out of bounds', () => {
 });
 
 test('get scale Ionian', () => {
-  const mode = {name: 'Ionian', intervals: MusicInterval.MODE_IONIAN}
-  const modes = MusicScale.getScale('Ionian');
-  expect(modes[0]).toBe(mode);
+  const expectedScale = {name: 'Ionian', intervals: MusicScale.MODE_IONIAN.intervals}
+  const scale = MusicScale.getScale('Ionian');
+  expect(scale).toEqual(expectedScale);
 });
