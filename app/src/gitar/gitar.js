@@ -13,7 +13,7 @@ class Gitar extends Component {
       this.selectedInterval = null
       this.selectedScale = null;
       this.selectedIntervalNotes = [] // result of selecting, int or scale
-      
+
       this.state = {
         selectedNote: this.selectedNote,
         selectedInterval: this.selectedInterval,
@@ -39,7 +39,6 @@ class Gitar extends Component {
             this.selectedNote, scale.intervals
           );
         }
-
 
       } else if (this.selectedNote &&
         menuItem.type === MenuItem.TYPE_SCALE && menuItem.selection
@@ -100,6 +99,8 @@ class Gitar extends Component {
                   intervals={MusicInterval.getIntervals()}
                   scales={MusicScale.getScales()}
                   modes={MusicScale.getModes()}
+                  triads={MusicScale.getTriads()}
+                  arpeggios={MusicScale.getArpeggios()}
                   selectedInterval={this.state.selectedInterval}
                   handleMenuSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}
                   />

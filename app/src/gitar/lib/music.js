@@ -263,6 +263,70 @@ class MusicScale {
     intervals: MusicScale.MODE_AEOLIAN.intervals
   }
 
+  static MAJ_TRIAD = {
+    name: 'Major triad',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_3RD,
+      MusicInterval.PER_5TH
+    ]
+  };
+
+  static MIN_TRIAD = {
+    name: 'Minor triad',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MIN_3RD,
+      MusicInterval.PER_5TH
+    ]
+  };
+
+  static DIM_TRIAD = {
+    name: 'Diminished triad',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MIN_3RD,
+      MusicInterval.DIM_5TH
+    ]
+  };
+
+  static MAJ_ARPEGGIO = {
+    name: 'Major arpeggio',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_3RD,
+      MusicInterval.PER_5TH
+    ]
+  };
+
+  static MAJ_7TH_ARPEGGIO = {
+    name: 'Major seventh',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_3RD,
+      MusicInterval.PER_5TH,
+      MusicInterval.MAJ_7TH
+    ]
+  };
+
+  static MIN_7TH_ARPEGGIO = {
+    name: 'Min seventh',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MIN_3RD,
+      MusicInterval.PER_5TH,
+      MusicInterval.MIN_7TH
+    ]
+  };
+
+  static getTriads() {
+    return [
+      MusicScale.MAJ_TRIAD,
+      MusicScale.MIN_TRIAD,
+      MusicScale.DIM_TRIAD
+    ];
+  }
+
   static getScales() {
     return [
       MusicScale.MAJOR,
@@ -282,8 +346,16 @@ class MusicScale {
     ];
   }
 
+  static getArpeggios() {
+    return [
+      MusicScale.MAJ_ARPEGGIO,
+      MusicScale.MAJ_7TH_ARPEGGIO,
+      MusicScale.MIN_7TH_ARPEGGIO
+    ]
+  }
+
   static getScale(name){
-    const scales = MusicScale.getScales().concat(MusicScale.getModes())
+    const scales = MusicScale.getScales().concat(MusicScale.getModes()).concat(MusicScale.getTriads()).concat(MusicScale.getArpeggios())
     const length = scales.length;
     for (let i = 0; i < length; i++) {
       if (scales[i].name === name) {

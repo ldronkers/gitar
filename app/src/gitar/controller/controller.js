@@ -40,6 +40,12 @@ class Conroller extends Component {
                 <div className="scale-selection">
                  <span className="scale-selection-label">Modes: </span>{this.renderScales(this.props.modes)}
                 </div>
+                <div className="scale-selection">
+                 <span className="scale-selection-label">Triads: </span>{this.renderScales(this.props.triads)}
+                </div>
+                <div className="scale-selection">
+                 <span className="scale-selection-label">Arpeggios: </span>{this.renderScales(this.props.arpeggios)}
+                </div>
               </div>
             </div>
         );
