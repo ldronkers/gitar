@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import String from './string';
 import Controller from './controller/controller'
-import { Music, MusicNote, MusicInterval, MusicScale } from './lib/music.js';
+import Music from './lib/music.js';
+import MusicNote from './lib/musicnote.js';
+import MusicInterval from './lib/musicinterval.js';
+import MusicScale from './lib/musicscale.js';
 import { MenuItem } from './lib/control'
 
 class Gitar extends Component {
