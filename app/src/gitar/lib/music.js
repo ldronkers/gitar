@@ -355,7 +355,11 @@ class MusicScale {
   }
 
   static getScale(name){
-    const scales = MusicScale.getScales().concat(MusicScale.getModes()).concat(MusicScale.getTriads()).concat(MusicScale.getArpeggios())
+    let scales = MusicScale.getScales();
+    scales = scales.concat(MusicScale.getModes());
+    scales = scales.concat(MusicScale.getTriads());
+    scales = scales.concat(MusicScale.getArpeggios());
+    console.log(scales);
     const length = scales.length;
     for (let i = 0; i < length; i++) {
       if (scales[i].name === name) {
