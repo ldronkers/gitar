@@ -78,9 +78,7 @@ class Gitar extends Component {
     handleNoteTypes(e){
       if (e.target.text === 'sharps') {
         this.music = new Music(Guitar.getNotesLeft());
-        console.log('sharp');
       } else {
-        console.log('flat');
         this.music = new Music(Guitar.getNotes());
       }
       this.setState({music: this.music});
