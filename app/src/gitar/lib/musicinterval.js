@@ -39,6 +39,16 @@ class MusicInterval {
     MusicInterval.MAJ_7TH
   ];
 
+  static NATURAL_MINOR_SCALE = [
+    MusicInterval.PER_UNI,
+    MusicInterval.MAJ_2ND,
+    MusicInterval.MIN_3RD,
+    MusicInterval.PER_4TH,
+    MusicInterval.PER_5TH,
+    MusicInterval.MIN_6TH,
+    MusicInterval.MIN_7TH
+  ];
+
   static MODE_INTERVALS = [
     MusicInterval.PER_UNI,
     MusicInterval.MAJ_2ND,

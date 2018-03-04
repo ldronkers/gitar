@@ -6,17 +6,18 @@ import MusicNote from './lib/musicnote.js';
 import MusicInterval from './lib/musicinterval.js';
 import MusicScale from './lib/musicscale.js';
 import { MenuItem } from './lib/control'
+import Guitar from './lib/guitar'
 
 class Gitar extends Component {
     constructor() {
       super()
-      this.music = new Music(MusicNote.getNotes());
+      this.music = new Music(Guitar.getNotesLeft());
 
       this.selectedNote = null;
       this.selectedInterval = null
       this.selectedScale = null;
       this.selectedIntervalNotes = [] // result of selecting, int or scale
-  
+
       this.state = {
         selectedNote: this.selectedNote,
         selectedInterval: this.selectedInterval,
@@ -75,7 +76,7 @@ class Gitar extends Component {
     }
 
     renderString(index) {
-      const stringNotes = this.music.getStringNotes(index)
+      const stringNotes = this.music.getStringNotes(index);
       return (
         <String
           name={this.music.notes[index].name}
