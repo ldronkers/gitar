@@ -46,6 +46,9 @@ class Conroller extends Component {
                 <div className="scale-selection">
                  <span className="scale-selection-label">Arpeggios: </span>{this.renderScales(this.props.arpeggios)}
                 </div>
+                <div className="flatsharpes">
+                    <a href="#sharps" onClick={(e) => {this.props.handleNoteTypes(e)}}>sharps</a> | <a href="#flats" onClick={(e) => {this.props.handleNoteTypes(e)}}>flats</a>
+                </div>
               </div>
             </div>
         );

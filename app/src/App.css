@@ -94,3 +94,10 @@
   flex-grow: 0;
   padding: 10px;
 }
+
+#controller .flatsharpes {
+  flex-grow: 0;
+  padding: 10px;
+  position: absolute;
+  right:0;
+}

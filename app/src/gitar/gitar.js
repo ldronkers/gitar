@@ -75,6 +75,17 @@ class Gitar extends Component {
         });
     }
 
+    handleNoteTypes(e){
+      if (e.target.text === 'sharps') {
+        this.music = new Music(Guitar.getNotesLeft());
+        console.log('sharp');
+      } else {
+        console.log('flat');
+        this.music = new Music(Guitar.getNotes());
+      }
+      this.setState({music: this.music});
+    }
+
     renderString(index) {
       const stringNotes = this.music.getStringNotes(index);
       return (
@@ -107,6 +118,7 @@ class Gitar extends Component {
                   arpeggios={MusicScale.getArpeggios()}
                   selectedInterval={this.state.selectedInterval}
                   handleMenuSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}
+                  handleNoteTypes={(e)=>{this.handleNoteTypes(e)}}
                   />
             </div>
         );
