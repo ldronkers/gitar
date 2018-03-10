@@ -1,70 +1,132 @@
+import { goRound } from './utils';
+
 class MusicNote {
+
   static E = '4';
   static B = '11';
   static G = '7';
   static D = '2';
   static A = '9';
-  static SIGN_FLAT = 'b';
-  static SIGN_SHARP = '#';
+
   static NOTE_NAMES = ['C','D','E','F','G','A','B'];
 
-  constructor(name) {
-    const note = MusicNote.getNote(name);
-    this.contextName = name;
-    this.id = note.id;
-    this.name = note.name;
-    this.altName = note.altName;
-    this.displayName = note.displayName;
+  static ALT_NOTE_NAMES = {
+      F: 'E#',
+      B: 'Cb',
+      C: 'B#',
+      E: 'Fb',
+      G: 'F##'
+  };
+
+  static INTERVAL_NOTES_SHARP = [
+    'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'
+  ];
+
+  static notes = {
+    c: new MusicNote(0, 'C'),
+    bs: new MusicNote(0, 'C', 'B#'),
+    dff: new MusicNote(0, 'C', 'Dbb'),
+    df: new MusicNote(1, 'Db'),
+    cs: new MusicNote(1, 'Db', 'C#'),
+    d: new MusicNote(2, 'D'),
+    css: new MusicNote(2, 'D'),
+    eff: new MusicNote(2, 'D', 'Ebb'),
+    ef: new MusicNote(3, 'Eb'),
+    ds: new MusicNote(3, 'Eb', 'D#'),
+    e: new MusicNote(4, 'E'),
+    dss: new MusicNote(4, 'E', 'D##'),
+    ff: new MusicNote(4, 'E', 'Fb'),
+    f: new MusicNote(5, 'F'),
+    es: new MusicNote(5, 'F', 'E#'),
+    gff: new MusicNote(5, 'F', 'Gbb'),
+    gf: new MusicNote(6, 'Gb'),
+    fs: new MusicNote(6, 'Gb', 'F#'),
+    g: new MusicNote(7, 'G'),
+    fss: new MusicNote(7, 'G', 'F##'),
+    aff: new MusicNote(7, 'G', 'Abb'),
+    af: new MusicNote(8, 'Ab'),
+    gs: new MusicNote(8, 'Ab', 'G#'),
+    a: new MusicNote(9, 'A'),
+    gss: new MusicNote(9, 'A', 'G##'),
+    bff: new MusicNote(9, 'A', 'Bbb'),
+    bf: new MusicNote(10, 'Bb'),
+    as: new MusicNote(10, 'Bb', 'A#'),
+    b: new MusicNote(11, 'B'),
+    cf: new MusicNote(11, 'B', 'Cb')
   }
 
-  get unsignedName() {
-    return this.contextName[0];
+  constructor(id, name, displayName=''){
+    this.id = id;
+    this.name = name;
+    this.displayName = displayName ? displayName : name;
   }
 
-  get isSigned() {
-    return this.getSign(this.name) ? true : false;
-  }
-
-  get isFlat() {
-    return this.getSign(this.contextName) === 'b' ? true : false;
-  }
-
-  get isSharp() {
-    return this.getSign(this.contextName) === '#' ? true : false;
-  }
-
-  getSign(noteName){
-    if (noteName.length === 2){
-      return noteName[1];
-    }
+  static instance(noteName) {
+    noteName = noteName.replace('b', 'f').replace('b', 'f');
+    noteName = noteName.replace('#', 's').replace('#', 's');
+    const name = noteName.toLowerCase();
+    return MusicNote.notes[name];
   }
 
   static getNotes() {
-     return [
-        {id: 0, name: 'C', displayName: 'C', altName: ''},
-        {id: 1, name: 'Db', displayName: 'C#/Db', altName: 'C#'},
-        {id: 2, name: 'D', displayName: 'D', altName: ''},
-        {id: 3, name: 'Eb', displayName: 'D#/Eb', altName: 'D#'},
-        {id: 4, name: 'E', displayName: 'E', altName: ''},
-        {id: 5, name: 'F', displayName: 'F', altName: ''},
-        {id: 6, name: 'Gb', displayName: 'F#/Gb', altName: 'F#'},
-        {id: 7, name: 'G', displayName: 'G', altName: ''},
-        {id: 8, name: 'Ab', displayName: 'G#/Ab', altName: 'G#'},
-        {id: 9, name: 'A', displayName: 'A', altName: ''},
-        {id: 10, name: 'Bb', displayName: 'A#/Bb', altName: 'A#'},
-        {id: 11, name: 'B', displayName: 'B', altName: ''}
+    return [
+      MusicNote.notes['c'],
+      MusicNote.notes['df'],
+      MusicNote.notes['d'],
+      MusicNote.notes['ef'],
+      MusicNote.notes['e'],
+      MusicNote.notes['f'],
+      MusicNote.notes['gf'],
+      MusicNote.notes['g'],
+      MusicNote.notes['af'],
+      MusicNote.notes['a'],
+      MusicNote.notes['bf'],
+      MusicNote.notes['b'],
     ];
   }
 
-  static getNote(name){
-    const notes = MusicNote.getNotes()
-    const length = notes.length;
-    for (let i = 0; i < length; i++) {
-      const n = notes[i];
-      if (n.name === name || n.altName === name) {
-        return notes[i];
-      }
+  static getNotesLeft(){
+    return [
+      MusicNote.notes['c'],
+      MusicNote.notes['cs'],
+      MusicNote.notes['d'],
+      MusicNote.notes['ds'],
+      MusicNote.notes['e'],
+      MusicNote.notes['f'],
+      MusicNote.notes['fs'],
+      MusicNote.notes['g'],
+      MusicNote.notes['gs'],
+      MusicNote.notes['a'],
+      MusicNote.notes['as'],
+      MusicNote.notes['b']
+    ];
+  }
+
+  static getNoteNameForInterval(note, interval) {
+    const notes = MusicNote.INTERVAL_NOTES_SHARP;
+    const position = notes.indexOf(note.displayName);
+    const intervalNames = goRound(notes, position);
+    let result = intervalNames[interval.semitones];
+    const nextNoteName = MusicNote.getNoteName(note, interval);
+
+    // If the result does not match the notename that needs to be displayed
+    // it's E's (E#) turn, and not F
+    if (result[0] !== nextNoteName) { // refactor unsigned name 'C#'[0] = 'C'
+      result = MusicNote.ALT_NOTE_NAMES[result];
     }
+
+    return result;
+  }
+
+  static getNoteName(note, interval){
+    const notes = MusicNote.NOTE_NAMES;
+    const position = notes.indexOf(note.displayName[0]);
+    const noteNames = goRound(notes, position);
+    return noteNames[interval.shortName.match(/[1-9]/) -1]; // refactor
+  }
+
+  get unsignedName() {
+    return this.name[0];
   }
 }
 

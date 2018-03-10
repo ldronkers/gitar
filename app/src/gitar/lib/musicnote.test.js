@@ -1,37 +1,80 @@
 import MusicNote from './musicnote';
+import MusicInterval from './musicinterval';
 
-test('is signed', () => {
-  const note = new MusicNote('Ab');
-  expect(note.isSigned).toEqual(true);
+describe('test guitar notes', () => {
+
+  test('get note', () => {
+    const notes = [
+      {name: 'B#', note: new MusicNote(0, 'C', 'B#')},
+      {name: 'F##', note: new MusicNote(7, 'G', 'F##')},
+      {name: 'E#', note: new MusicNote(5, 'F', 'E#')},
+      {name: 'Abb', note: new MusicNote(7, 'G', 'Abb')}
+    ];
+
+    for (let i = 0; i < notes.length; i++) {
+      expect(MusicNote.instance(notes[i].name)).toEqual(notes[i].note);
+    }
+  });
+
+  test('get display name', () => {
+    const notes = [
+      {name: 'B#', note: new MusicNote(0, 'C', 'B#')},
+      {name: 'F##', note: new MusicNote(7, 'G', 'F##')},
+      {name: 'E#', note: new MusicNote(5, 'F', 'E#')},
+      {name: 'Abb', note: new MusicNote(7, 'G', 'Abb')}
+    ];
+
+    for (let i = 0; i < notes.length; i++) {
+      expect(MusicNote.instance(notes[i].name).displayName).toEqual(notes[i].note.displayName);
+    }
+  });
+
+  test('getNotes', () => {
+    const notes = MusicNote.getNotes();
+    expect(notes[0]).toEqual(new MusicNote(0, 'C'));
+  });
 });
 
-test('is signed without sign', () => {
-  const note = new MusicNote('A');
-  expect(note.isSigned).toEqual(false);
-});
+describe('test getting of the right note names', () => {
 
-test('is flat', () => {
-  const note = new MusicNote('Ab');
-  expect(note.isFlat).toEqual(true);
-});
+  test('get name of interval note', () => {
+    const noteName =  MusicNote.getNoteNameForInterval(
+      MusicNote.instance('B'),
+      MusicInterval.MAJ_2ND
+    );
+    expect(noteName).toBe('C#');
+  });
 
-test('is sharp', () => {
-  const note = new MusicNote('C#');
-  expect(note.isSharp).toEqual(true);
-});
+  test('f-sharp major scale, maj 7th', () => {
+    const noteName =  MusicNote.getNoteNameForInterval(
+      MusicNote.instance('F#'),
+      MusicInterval.MAJ_7TH
+    );
+    expect(noteName).toBe('E#');
+  });
 
-test('is named in context', () => {
-  const note = new MusicNote('C#');
-  expect(note.name).toEqual('Db');
-  expect(note.contextName).toEqual('C#');
-});
+  test('g-sharp major scale, maj 3d', () => {
+    const noteName =  MusicNote.getNoteNameForInterval(
+      MusicNote.instance('G#'),
+      MusicInterval.MAJ_3RD
+    );
+    expect(noteName).toBe('B#');
+  });
 
-test('is sharp without signed note', () => {
-  const note = new MusicNote('C');
-  expect(note.isSharp).toEqual(false);
-});
+  test('g-sharp major scale, maj 6th', () => {
+    const noteName =  MusicNote.getNoteNameForInterval(
+      MusicNote.instance('G#'),
+      MusicInterval.MAJ_6TH
+    );
+    expect(noteName).toBe('E#');
+  });
 
-test('get unsigned name', () => {
-  const note = new MusicNote('C#');
-  expect(note.unsignedName).toEqual('C');
+  test('g-sharp major scale, maj 7th', () => {
+    const noteName =  MusicNote.getNoteNameForInterval(
+      MusicNote.instance('G#'),
+      MusicInterval.MAJ_7TH
+    );
+    expect(noteName).toBe('F##');
+  });
+
 });

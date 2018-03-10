@@ -1,11 +1,10 @@
-import React from 'react';
 import Music from './music.js';
 import MusicNote from './musicnote.js';
 import MusicInterval from './musicinterval.js';
 import MusicScale from './musicscale.js';
 
 test('test get interval note', () => {
-  var notes = MusicNote.getNotes()
+  var notes = MusicNote.getNotesLeft();
   const music = new Music(notes);
   const interval = MusicInterval.PER_5TH;
 
@@ -38,7 +37,7 @@ test('get scale Ionian', () => {
 });
 
 test('get name', () => {
-  const note = MusicNote.getNote('D');
+  const note = MusicNote.instance('D');
   expect(note.name).toEqual('D')
 });
 
@@ -46,9 +45,9 @@ test('get interval notes', () => {
   const music = new Music(MusicNote.getNotes());
   const intervals = [MusicInterval.PER_4TH, MusicInterval.PER_5TH];
   const expectedNotes = [
-    MusicNote.getNote('A'), MusicNote.getNote('B')
+    MusicNote.instance('A'), MusicNote.instance('B')
   ];
   expect(
-    music.getIntervalNotes(MusicNote.getNote('E'), intervals)
+    music.getIntervalNotes(MusicNote.instance('E'), intervals)
   ).toEqual(expectedNotes)
 });

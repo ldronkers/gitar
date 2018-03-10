@@ -5,13 +5,12 @@ import Music from './lib/music.js';
 import MusicNote from './lib/musicnote.js';
 import MusicInterval from './lib/musicinterval.js';
 import MusicScale from './lib/musicscale.js';
-import { MenuItem } from './lib/control'
-import Guitar from './lib/guitar'
+import { MenuItem } from './lib/control';
 
 class Gitar extends Component {
     constructor() {
       super()
-      this.music = new Music(Guitar.getNotesLeft());
+      this.music = new Music(MusicNote.getNotesLeft());
 
       this.selectedNote = null;
       this.selectedInterval = null
@@ -77,9 +76,9 @@ class Gitar extends Component {
 
     handleNoteTypes(e){
       if (e.target.text === 'sharps') {
-        this.music = new Music(Guitar.getNotesLeft());
+        this.music = new Music(MusicNote.getNotesLeft());
       } else {
-        this.music = new Music(Guitar.getNotes());
+        this.music = new Music(MusicNote.getNotes());
       }
       this.setState({music: this.music});
     }
