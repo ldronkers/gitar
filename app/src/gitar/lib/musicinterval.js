@@ -1,4 +1,5 @@
 class MusicInterval {
+
   static PER_UNI = {semitones: 0, name: 'Perfect uninison', shortName: '1st'};
   static AUG_UNI = {semitones: 1, name: 'Augmented uninison', shortName: '#1'};
 
@@ -27,7 +28,7 @@ class MusicInterval {
   static DIM_7TH = {semitones: 9, name: 'Diminished seventh', shortName: 'bb7'};
   static MIN_7TH = {semitones: 10, name: 'Minor seventh', shortName: 'b7'};
   static MAJ_7TH = {semitones: 11, name: 'Major seventh', shortName: '7th'};
-  static AUG_7TH = {semitones: 12, name: 'Augmented seventh', shortName: 'Oct'};
+  static AUG_7TH = {semitones: 0, name: 'Augmented seventh', shortName: 'Oct'};
 
   static MAJOR_SCALE = [
     MusicInterval.PER_UNI,

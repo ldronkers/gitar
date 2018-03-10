@@ -6,6 +6,7 @@ class MusicNote {
   static A = '9';
   static SIGN_FLAT = 'b';
   static SIGN_SHARP = '#';
+  static NOTE_NAMES = ['C','D','E','F','G','A','B'];
 
   constructor(name) {
     const note = MusicNote.getNote(name);

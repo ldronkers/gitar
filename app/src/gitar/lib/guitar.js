@@ -1,3 +1,5 @@
+import { goRound } from './utils';
+
 class Guitar {
 
   constructor() {
@@ -65,15 +67,19 @@ class Guitar {
 
 class Note {
 
-  static intervalContainer = {
-    c: '',
-    d: '',
-    e: '',
-    f: '',
-    g: '',
-    a: '',
-    b: '',
-  }
+  static NOTE_NAMES = ['C','D','E','F','G','A','B'];
+
+  static ALT_NOTE_NAMES = {
+      F: 'E#',
+      B: 'Cb',
+      C: 'B#',
+      E: 'Fb',
+      G: 'F##'
+  };
+
+  static INTERVAL_NOTES_SHARP = [
+    'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'
+  ];
 
   static notes = {
     c: new Note(0, 'C'),
@@ -114,11 +120,38 @@ class Note {
     this.displayName = displayName ? displayName : name;
   }
 
+  get unsignedName() {
+    return this.name[0];
+  }
+
   static instance(noteName) {
     noteName = noteName.replace('b', 'f').replace('b', 'f');
     noteName = noteName.replace('#', 's').replace('#', 's');
     const name = noteName.toLowerCase();
     return Note.notes[name];
+  }
+
+  static getNoteNameForInterval(note, interval) {
+    const notes = Note.INTERVAL_NOTES_SHARP;
+    const position = notes.indexOf(note.displayName);
+    const intervalNames = goRound(notes, position);
+    let result = intervalNames[interval.semitones];
+    const nextNoteName = Note.getNoteName(note, interval);
+
+    // Ff the result does not match the notename that needs to be displayed
+    // it's E's (E#) turn, and not F
+    if (result[0] !== nextNoteName) { // refactor unsigned name 'C#'[0] = 'C'
+      result = Note.ALT_NOTE_NAMES[result];
+    }
+
+    return result;
+  }
+
+  static getNoteName(note, interval){
+    const notes = Note.NOTE_NAMES;
+    const position = notes.indexOf(note.displayName[0]);
+    const noteNames = goRound(notes, position);
+    return noteNames[interval.shortName.match(/[1-9]/) -1]; // refactor
   }
 }
 

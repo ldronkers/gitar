@@ -52,13 +52,3 @@ test('get interval notes', () => {
     music.getIntervalNotes(MusicNote.getNote('E'), intervals)
   ).toEqual(expectedNotes)
 });
-
-// G flat major scale notes: ['Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F'];
-test('get notes from scale', () => {
-  const note = new MusicNote('Gb');
-  const scale = new MusicScale(note, MusicInterval.MAJOR_SCALE);
-  const notes = scale.getNotes();
-
-  // in the context of the scale B == Cb
-  expect(notes[3].displayName).toEqual('Cb');
-})
