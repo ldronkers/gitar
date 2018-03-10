@@ -38,7 +38,7 @@ describe('test guitar notes', () => {
 describe('test getting of the right note names', () => {
 
   test('get name of interval note', () => {
-    const noteName =  MusicNote.getNoteNameForInterval(
+    const noteName =  MusicNote.getNameForInterval(
       MusicNote.instance('B'),
       MusicInterval.MAJ_2ND
     );
@@ -46,7 +46,7 @@ describe('test getting of the right note names', () => {
   });
 
   test('f-sharp major scale, maj 7th', () => {
-    const noteName =  MusicNote.getNoteNameForInterval(
+    const noteName =  MusicNote.getNameForInterval(
       MusicNote.instance('F#'),
       MusicInterval.MAJ_7TH
     );
@@ -54,7 +54,7 @@ describe('test getting of the right note names', () => {
   });
 
   test('g-sharp major scale, maj 3d', () => {
-    const noteName =  MusicNote.getNoteNameForInterval(
+    const noteName =  MusicNote.getNameForInterval(
       MusicNote.instance('G#'),
       MusicInterval.MAJ_3RD
     );
@@ -62,7 +62,7 @@ describe('test getting of the right note names', () => {
   });
 
   test('g-sharp major scale, maj 6th', () => {
-    const noteName =  MusicNote.getNoteNameForInterval(
+    const noteName =  MusicNote.getNameForInterval(
       MusicNote.instance('G#'),
       MusicInterval.MAJ_6TH
     );
@@ -70,7 +70,7 @@ describe('test getting of the right note names', () => {
   });
 
   test('g-sharp major scale, maj 7th', () => {
-    const noteName =  MusicNote.getNoteNameForInterval(
+    const noteName =  MusicNote.getNameForInterval(
       MusicNote.instance('G#'),
       MusicInterval.MAJ_7TH
     );

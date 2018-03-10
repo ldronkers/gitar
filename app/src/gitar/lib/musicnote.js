@@ -102,15 +102,15 @@ class MusicNote {
     ];
   }
 
-  static getNoteNameForInterval(note, interval) {
+  static getNameForInterval(note, interval) {
     const notes = MusicNote.INTERVAL_NOTES_SHARP;
     const position = notes.indexOf(note.displayName);
     const intervalNames = goRound(notes, position);
     let result = intervalNames[interval.semitones];
-    const nextNoteName = MusicNote.getNoteName(note, interval);
 
     // If the result does not match the notename that needs to be displayed
     // it's E's (E#) turn, and not F
+    const nextNoteName = MusicNote.getNoteName(note, interval);
     if (result[0] !== nextNoteName) { // refactor unsigned name 'C#'[0] = 'C'
       result = MusicNote.ALT_NOTE_NAMES[result];
     }
