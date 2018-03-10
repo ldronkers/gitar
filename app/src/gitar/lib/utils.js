@@ -16,6 +16,6 @@ export function goRound(values = [], position) {
   if (position >= 0 && position <= max) {
     return position > 0 ? values.slice(position, max + 1).concat(values.slice(0, position)) : values;
   } else {
-    throw 'Position not in bounds (min:1, max: index+1)';
+    throw new Error('Position not in bounds (min:1, max: index+1)');
   }
 }
