@@ -3,24 +3,23 @@ import Note from './note'
 import { NotesMenuItem } from './lib/control'
 
 class String extends Component {
-    isInIntervalNotes(note) {
+
+    getIntervalNote(note) {
       const lenght = this.props.intervalNotes.length;
       for (let i = 0; i < lenght; i++) {
         if (note.id === this.props.intervalNotes[i].id){
-          return true;
+          return this.props.intervalNotes[i];
         }
       }
-      return false;
     }
 
-    handleNotes(notes) {
+    renderNotes(notes) {
       return(
         this.props.notes.map((note, index) => (
           <Note key={note.id}
             selectedNote={this.props.selectedNote}
-            intervalNote={this.props.intervalNote}
-            isIntervalNote={this.isInIntervalNotes(note)}
-            note={note}
+            isIntervalNote={this.getIntervalNote(note) ? true : false}
+            note={this.getIntervalNote(note) ? this.getIntervalNote(note) : note}
             onClicked={(note) => {this.props.handleNoteSelection(new NotesMenuItem(note))}}>
           </Note>
         ))
@@ -31,7 +30,7 @@ class String extends Component {
         return(
             <div className="string">
               <div className="string-name">{this.props.name}</div>
-              {this.handleNotes(this.props.notes)}
+              {this.renderNotes(this.props.notes)}
             </div>
         );
     }

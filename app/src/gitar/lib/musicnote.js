@@ -15,7 +15,11 @@ class MusicNote {
       B: 'Cb',
       C: 'B#',
       E: 'Fb',
-      G: 'F##'
+      G: 'F##',
+      D: 'C##',
+      //E: 'D##',
+      //B: 'A##',
+      //A: 'G##'
   };
 
   static INTERVAL_NOTES_SHARP = [
@@ -102,7 +106,7 @@ class MusicNote {
     ];
   }
 
-  static getNameForInterval(note, interval) {
+  static getForInterval(note, interval) {
     const notes = MusicNote.INTERVAL_NOTES_SHARP;
     const position = notes.indexOf(note.displayName);
     const intervalNames = goRound(notes, position);
@@ -115,7 +119,7 @@ class MusicNote {
       result = MusicNote.ALT_NOTE_NAMES[result];
     }
 
-    return result;
+    return MusicNote.instance(result);
   }
 
   static getNoteName(note, interval){

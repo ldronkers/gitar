@@ -32,7 +32,7 @@ class Gitar extends Component {
 
         if (this.selectedInterval) {
           this.selectedIntervalNotes = [this.selectedNote].concat(
-            this.music.getIntervalNote(this.selectedNote, this.selectedInterval)
+            MusicNote.getForInterval(this.selectedNote, this.selectedInterval)
           )
         }
         // or
@@ -57,7 +57,7 @@ class Gitar extends Component {
       } else if (this.selectedNote && menuItem.type === MenuItem.TYPE_INTERVAL) {
         this.selectedInterval = menuItem.selection;
         this.selectedIntervalNotes = [this.selectedNote].concat(
-          this.music.getIntervalNote(this.selectedNote, menuItem.selection)
+          MusicNote.getForInterval(this.selectedNote, menuItem.selection)
         )
         this.selectedScale = null;
       }

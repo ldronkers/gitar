@@ -38,43 +38,43 @@ describe('test guitar notes', () => {
 describe('test getting of the right note names', () => {
 
   test('get name of interval note', () => {
-    const noteName =  MusicNote.getNameForInterval(
+    const note =  MusicNote.getForInterval(
       MusicNote.instance('B'),
       MusicInterval.MAJ_2ND
     );
-    expect(noteName).toBe('C#');
+    expect(note.displayName).toBe('C#');
   });
 
   test('f-sharp major scale, maj 7th', () => {
-    const noteName =  MusicNote.getNameForInterval(
+    const note =  MusicNote.getForInterval(
       MusicNote.instance('F#'),
       MusicInterval.MAJ_7TH
     );
-    expect(noteName).toBe('E#');
+    expect(note.displayName).toBe('E#');
   });
 
   test('g-sharp major scale, maj 3d', () => {
-    const noteName =  MusicNote.getNameForInterval(
+    const note =  MusicNote.getForInterval(
       MusicNote.instance('G#'),
       MusicInterval.MAJ_3RD
     );
-    expect(noteName).toBe('B#');
+    expect(note.displayName).toBe('B#');
   });
 
   test('g-sharp major scale, maj 6th', () => {
-    const noteName =  MusicNote.getNameForInterval(
+    const note =  MusicNote.getForInterval(
       MusicNote.instance('G#'),
       MusicInterval.MAJ_6TH
     );
-    expect(noteName).toBe('E#');
+    expect(note.displayName).toBe('E#');
   });
 
   test('g-sharp major scale, maj 7th', () => {
-    const noteName =  MusicNote.getNameForInterval(
+    const note =  MusicNote.getForInterval(
       MusicNote.instance('G#'),
       MusicInterval.MAJ_7TH
     );
-    expect(noteName).toBe('F##');
+    expect(note.displayName).toBe('F##');
   });
 
 });
