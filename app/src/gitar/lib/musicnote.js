@@ -11,15 +11,17 @@ class MusicNote {
   static NOTE_NAMES = ['C','D','E','F','G','A','B'];
 
   static ALT_NOTE_NAMES = {
-      F: 'E#',
-      //B: 'Cb',
+      A: 'G##',
+      B: 'A##',
       C: 'B#',
-      //E: 'Fb',
-      G: 'F##',
       D: 'C##',
       E: 'D##',
-      B: 'A##',
-      A: 'G##'
+      F: 'E#',
+      G: 'F##',
+      AS: 'Bb',
+      GS: 'Ab',
+      CS: 'Db',
+      DS: 'Eb'
   };
 
   static INTERVAL_NOTES_SHARP = [
@@ -33,7 +35,7 @@ class MusicNote {
     df: new MusicNote(1, 'Db'),
     cs: new MusicNote(1, 'Db', 'C#'),
     d: new MusicNote(2, 'D'),
-    css: new MusicNote(2, 'D'),
+    css: new MusicNote(2, 'D', 'C##'),
     eff: new MusicNote(2, 'D', 'Ebb'),
     ef: new MusicNote(3, 'Eb'),
     ds: new MusicNote(3, 'Eb', 'D#'),
@@ -55,6 +57,7 @@ class MusicNote {
     bff: new MusicNote(9, 'A', 'Bbb'),
     bf: new MusicNote(10, 'Bb'),
     as: new MusicNote(10, 'Bb', 'A#'),
+    ass: new MusicNote(10, 'B', 'A##'),
     b: new MusicNote(11, 'B'),
     cf: new MusicNote(11, 'B', 'Cb')
   }
@@ -116,7 +119,7 @@ class MusicNote {
     // it's E's (E#) turn, and not F
     const nextNoteName = MusicNote.getNoteName(note, interval);
     if (result[0] !== nextNoteName) { // refactor unsigned name 'C#'[0] = 'C'
-      result = MusicNote.ALT_NOTE_NAMES[result];
+      result = MusicNote.ALT_NOTE_NAMES[result.replace('#','S')]; // refactor
     }
 
     return MusicNote.instance(result);
