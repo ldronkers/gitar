@@ -12,14 +12,14 @@ class MusicNote {
 
   static ALT_NOTE_NAMES = {
       F: 'E#',
-      B: 'Cb',
+      //B: 'Cb',
       C: 'B#',
-      E: 'Fb',
+      //E: 'Fb',
       G: 'F##',
       D: 'C##',
-      //E: 'D##',
-      //B: 'A##',
-      //A: 'G##'
+      E: 'D##',
+      B: 'A##',
+      A: 'G##'
   };
 
   static INTERVAL_NOTES_SHARP = [
