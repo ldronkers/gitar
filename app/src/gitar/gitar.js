@@ -29,7 +29,6 @@ class Gitar extends Component {
     handleMenuSelection(menuItem) {
       if (menuItem.type === MenuItem.TYPE_NOTE) {
         this.selectedNote = menuItem.selection;
-
         if (this.selectedInterval) {
           this.selectedIntervalNotes = [this.selectedNote].concat(
             MusicNote.getForInterval(this.selectedNote, this.selectedInterval)
@@ -67,11 +66,11 @@ class Gitar extends Component {
 
     updateState() {
       this.setState({
-          selectedNote: this.selectedNote,
-          selectedInterval: this.selectedInterval,
-          selectedScale: this.selectedScale,
-          selectedIntervalNotes: this.selectedIntervalNotes,
-        });
+        selectedNote: this.selectedNote,
+        selectedInterval: this.selectedInterval,
+        selectedScale: this.selectedScale,
+        selectedIntervalNotes: this.selectedIntervalNotes,
+      });
     }
 
     handleNoteTypes(e){

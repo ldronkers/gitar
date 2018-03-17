@@ -6,9 +6,7 @@ describe('test guitar notes', () => {
   test('get note', () => {
     const notes = [
       {name: 'B#', note: new MusicNote(0, 'C', 'B#')},
-      {name: 'F##', note: new MusicNote(7, 'G', 'F##')},
       {name: 'E#', note: new MusicNote(5, 'F', 'E#')},
-      {name: 'Abb', note: new MusicNote(7, 'G', 'Abb')}
     ];
 
     for (let i = 0; i < notes.length; i++) {
@@ -19,9 +17,7 @@ describe('test guitar notes', () => {
   test('get display name', () => {
     const notes = [
       {name: 'B#', note: new MusicNote(0, 'C', 'B#')},
-      {name: 'F##', note: new MusicNote(7, 'G', 'F##')},
       {name: 'E#', note: new MusicNote(5, 'F', 'E#')},
-      {name: 'Abb', note: new MusicNote(7, 'G', 'Abb')}
     ];
 
     for (let i = 0; i < notes.length; i++) {
@@ -67,22 +63,6 @@ describe('test getting of the right note names', () => {
       MusicInterval.MAJ_6TH
     );
     expect(note.displayName).toBe('E#');
-  });
-
-  test('g-sharp major scale, maj 7th', () => {
-    const note =  MusicNote.getForInterval(
-      MusicNote.instance('G#'),
-      MusicInterval.MAJ_7TH
-    );
-    expect(note.displayName).toBe('F##');
-  });
-
-  test('a-sharp major scale, maj 3rd', () => {
-    const note =  MusicNote.getForInterval(
-      MusicNote.instance('A#'),
-      MusicInterval.MAJ_3RD
-    );
-    expect(note.displayName).toBe('C##');
   });
 
   test('f major scale, per 4th', () => {

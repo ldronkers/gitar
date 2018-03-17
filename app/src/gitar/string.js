@@ -5,6 +5,7 @@ import { NotesMenuItem } from './lib/control'
 class String extends Component {
 
     getIntervalNote(note) {
+      // console.log(this.props.intervalNotes);
       const lenght = this.props.intervalNotes.length;
       for (let i = 0; i < lenght; i++) {
         if (note.id === this.props.intervalNotes[i].id){
