@@ -13,11 +13,12 @@ class MusicNote {
   static ALT_NOTE_NAMES = {
       B: 'Cb',
       C: 'B#',
-      F: 'E#',
-      AS: 'Bb',
-      GS: 'Ab',
-      CS: 'Db',
-      DS: 'Eb'
+      E: 'Fb',
+      F: 'E#'
+      // AS: 'Bb',
+      // GS: 'Ab',
+      // CS: 'Db',
+      // DS: 'Eb'
   };
 
   static INTERVAL_NOTES_SHARP = [
@@ -107,16 +108,18 @@ class MusicNote {
     // If the result does not match the notename that needs to be displayed
     // it's E's (E#) turn, and not F
     const nextNoteName = MusicNote.getNoteName(note, interval);
-    //console.log(nextNoteName);
-    if (result[0] !== nextNoteName) { // refactor unsigned name 'C#'[0] = 'C'
-      //result = MusicNote.ALT_NOTE_NAMES[result.replace('#','S')]; // refactor
+    if (result[0] !== nextNoteName) {
+      if (result[0] in MusicNote.ALT_NOTE_NAMES) {
+        result = MusicNote.ALT_NOTE_NAMES[result[0]]
+      }
     }
+
     return MusicNote.instance(result);
   }
 
   static getNoteName(note, interval){
     const notes = MusicNote.NOTE_NAMES;
-    const position = notes.indexOf(note.name[0]);
+    const position = notes.indexOf(note.displayName[0]);
     const noteNames = goRound(notes, position);
     return noteNames[interval.shortName.match(/[1-9]/) -1]; // refactor
   }
