@@ -12,11 +12,11 @@ class MusicNote {
 
   static ALT_NOTE_NAMES = {
       B: 'Cb',
-      C: 'B#',
+      C: 'B#', // messes up 6th of Fmin
       E: 'Fb',
-      F: 'E#'
-      // AS: 'Bb',
-      // GS: 'Ab',
+      F: 'E#',
+      //A: 'Bb',
+      //G: 'Ab',
       // CS: 'Db',
       // DS: 'Eb'
   };
