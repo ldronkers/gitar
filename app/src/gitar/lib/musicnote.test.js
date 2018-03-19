@@ -129,4 +129,9 @@ describe('test getting of the right note names', () => {
     expect(note.displayName).toBe('Abb');
   });
 
+  test('Get wrong note instance', () => {
+    expect(() => {
+      MusicNote.instance('Ks')
+    }).toThrow('Notename "Ks" not a valid notename}.');
+  });
 });

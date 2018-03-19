@@ -29,7 +29,7 @@ class MusicNote {
     'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'
   ];
 
-  static notes = {
+  static NOTES = {
     C: new MusicNote(0, 'C'),
     BS: new MusicNote(0, 'C', 'B#'),
     DF: new MusicNote(1, 'Db'),
@@ -62,42 +62,47 @@ class MusicNote {
   }
 
   static instance(noteName) {
-    noteName = noteName.replace('b','F').replace('b', 'F');
-    noteName = noteName.replace('#', 'S').replace('#', 'S');
-    return MusicNote.notes[noteName];
+    let name = noteName.replace('b','F').replace('b', 'F');
+    name = name.replace('#', 'S').replace('#', 'S');
+
+    if (name in MusicNote.NOTES) {
+      return MusicNote.NOTES[name];
+    } else {
+      throw new Error(`Notename "${noteName}" not a valid notename}.`);
+    }
   }
 
   static getNotes() {
     return [
-      MusicNote.notes['C'],
-      MusicNote.notes['DF'],
-      MusicNote.notes['D'],
-      MusicNote.notes['EF'],
-      MusicNote.notes['E'],
-      MusicNote.notes['F'],
-      MusicNote.notes['GF'],
-      MusicNote.notes['G'],
-      MusicNote.notes['AF'],
-      MusicNote.notes['A'],
-      MusicNote.notes['BF'],
-      MusicNote.notes['B'],
+      MusicNote.NOTES['C'],
+      MusicNote.NOTES['DF'],
+      MusicNote.NOTES['D'],
+      MusicNote.NOTES['EF'],
+      MusicNote.NOTES['E'],
+      MusicNote.NOTES['F'],
+      MusicNote.NOTES['GF'],
+      MusicNote.NOTES['G'],
+      MusicNote.NOTES['AF'],
+      MusicNote.NOTES['A'],
+      MusicNote.NOTES['BF'],
+      MusicNote.NOTES['B'],
     ];
   }
 
   static getNotesLeft() {
     return [
-      MusicNote.notes['C'],
-      MusicNote.notes['CS'],
-      MusicNote.notes['D'],
-      MusicNote.notes['DS'],
-      MusicNote.notes['E'],
-      MusicNote.notes['F'],
-      MusicNote.notes['FS'],
-      MusicNote.notes['G'],
-      MusicNote.notes['GS'],
-      MusicNote.notes['A'],
-      MusicNote.notes['AS'],
-      MusicNote.notes['B']
+      MusicNote.NOTES['C'],
+      MusicNote.NOTES['CS'],
+      MusicNote.NOTES['D'],
+      MusicNote.NOTES['DS'],
+      MusicNote.NOTES['E'],
+      MusicNote.NOTES['F'],
+      MusicNote.NOTES['FS'],
+      MusicNote.NOTES['G'],
+      MusicNote.NOTES['GS'],
+      MusicNote.NOTES['A'],
+      MusicNote.NOTES['AS'],
+      MusicNote.NOTES['B']
     ];
   }
 
