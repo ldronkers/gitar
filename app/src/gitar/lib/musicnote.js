@@ -10,17 +10,6 @@ class MusicNote {
 
   static NOTE_NAMES = ['C','D','E','F','G','A','B'];
 
-  static ALT_NOTE_NAMES = {
-      B: 'Cb',
-      C: 'B#', // messes up 6th of Fmin
-      E: 'Fb',
-      F: 'E#',
-      //A: 'Bb',
-      //G: 'Ab',
-      // CS: 'Db',
-      // DS: 'Eb'
-  };
-
   static INTERVAL_NOTES_SHARP = [
     'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'
   ];
