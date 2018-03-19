@@ -44,6 +44,8 @@ class MusicNote {
     GF: new MusicNote(6, 'Gb'),
     FS: new MusicNote(6, 'Gb', 'F#'),
     G: new MusicNote(7, 'G'),
+    AFF: new MusicNote(7, 'G', 'Abb'),
+    FSS: new MusicNote(7, 'G', 'F##'),
     AF: new MusicNote(8, 'Ab'),
     GS: new MusicNote(8, 'Ab', 'G#'),
     A: new MusicNote(9, 'A'),
@@ -60,8 +62,8 @@ class MusicNote {
   }
 
   static instance(noteName) {
-    noteName = noteName.replace('b','F');
-    noteName = noteName.replace('#', 'S');
+    noteName = noteName.replace('b','F').replace('b', 'F');
+    noteName = noteName.replace('#', 'S').replace('#', 'S');
     return MusicNote.notes[noteName];
   }
 
@@ -82,7 +84,7 @@ class MusicNote {
     ];
   }
 
-  static getNotesLeft(){
+  static getNotesLeft() {
     return [
       MusicNote.notes['C'],
       MusicNote.notes['CS'],
@@ -103,21 +105,36 @@ class MusicNote {
     const notes = note.displayName.match(/b/) ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
     const position = notes.indexOf(note.displayName);
     const intervalNames = goRound(notes, position);
-    let result = intervalNames[interval.semitones];
+    const expectedNotename = MusicNote.getNoteName(note, interval);
+    let intervalNote = intervalNames[interval.semitones];
 
-    // If the result does not match the notename that needs to be displayed
-    // it's E's (E#) turn, and not F
-    const nextNoteName = MusicNote.getNoteName(note, interval);
-    if (result[0] !== nextNoteName) {
-      if (result[0] in MusicNote.ALT_NOTE_NAMES) {
-        result = MusicNote.ALT_NOTE_NAMES[result[0]]
+    if (intervalNote[0] !== expectedNotename ) {
+      intervalNote = MusicNote.rename(intervalNote, expectedNotename);
+    }
+
+    return MusicNote.instance(intervalNote);
+  }
+
+  static rename(noteName, expectedNotename) {
+    let notes = noteName.match(/b/) ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
+    const position = notes.indexOf(expectedNotename);
+    notes = goRound(notes, position);
+
+    let semitones = 0;
+    for (var note of notes) {
+      if (note !== noteName) {
+        semitones += 1;
+      } else {
+        break;
       }
     }
 
-    return MusicNote.instance(result);
+    const sign = semitones >= 10 ? 'b' : '#';
+    semitones = semitones >= 10 ? 12 - semitones : semitones;
+    return expectedNotename + sign.repeat(semitones);
   }
 
-  static getNoteName(note, interval){
+  static getNoteName(note, interval) {
     const notes = MusicNote.NOTE_NAMES;
     const position = notes.indexOf(note.displayName[0]);
     const noteNames = goRound(notes, position);

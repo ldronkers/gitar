@@ -113,4 +113,20 @@ describe('test getting of the right note names', () => {
     expect(note.displayName).toBe('Eb');
   });
 
+  test('Ab major scale, per 4tth', () => {
+    const note =  MusicNote.getForInterval(
+      MusicNote.instance('Ab'),
+      MusicInterval.PER_4TH
+    );
+    expect(note.displayName).toBe('Db');
+  });
+
+  test('Db major scale, dim 5th', () => {
+    const note =  MusicNote.getForInterval(
+      MusicNote.instance('Db'),
+      MusicInterval.DIM_5TH
+    );
+    expect(note.displayName).toBe('Abb');
+  });
+
 });
