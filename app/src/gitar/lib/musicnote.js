@@ -101,23 +101,19 @@ class MusicNote {
   }
 
   static getForInterval(note, interval) {
-    const notes = note.displayName.match(/b/) ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
-    const position = notes.indexOf(note.displayName);
-    const intervalNames = goRound(notes, position);
-    const expectedNotename = MusicNote.getNoteName(note, interval);
+    const intervalNames = MusicNote.getAllNotes(note);
+    const expectedNote = MusicNote.getNote(note, interval);
     let intervalNote = intervalNames[interval.semitones];
 
-    if (intervalNote[0] !== expectedNotename ) {
-      intervalNote = MusicNote.rename(intervalNote, expectedNotename);
+    if (intervalNote[0] !== expectedNote.name ) {
+      intervalNote = MusicNote.rename(intervalNote, expectedNote);
     }
 
     return MusicNote.instance(intervalNote);
   }
 
-  static rename(noteName, expectedNotename) {
-    let notes = noteName.match(/b/) ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
-    const position = notes.indexOf(expectedNotename);
-    notes = goRound(notes, position);
+  static rename(noteName, expectedNote) {
+    const notes = MusicNote.getAllNotes(expectedNote);
 
     let semitones = 0;
     for (var note of notes) {
@@ -130,14 +126,21 @@ class MusicNote {
 
     const sign = semitones >= 10 ? 'b' : '#';
     semitones = semitones >= 10 ? 12 - semitones : semitones;
-    return expectedNotename + sign.repeat(semitones);
+    return expectedNote.name + sign.repeat(semitones);
   }
 
-  static getNoteName(note, interval) {
+  static getNote(note, interval) {
     const notes = MusicNote.NOTE_NAMES;
     const position = notes.indexOf(note.displayName[0]);
     const noteNames = goRound(notes, position);
-    return noteNames[interval.shortName.match(/[1-9]/) -1]; // refactor
+    return MusicNote.instance(noteNames[interval.shortName.match(/[1-9]/) -1]); // refactor
+  }
+
+  static getAllNotes(startingWithNote) {
+    const match = startingWithNote.displayName.match(/b/);
+    const notes = match ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
+    const position = notes.indexOf(startingWithNote.displayName);
+    return goRound(notes, position);
   }
 
   get unsignedName() {
