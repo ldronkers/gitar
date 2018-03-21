@@ -31,7 +31,7 @@ class Gitar extends Component {
         this.selectedNote = menuItem.selection;
         if (this.selectedInterval) {
           this.selectedIntervalNotes = [this.selectedNote].concat(
-            MusicNote.getForInterval(this.selectedNote, this.selectedInterval)
+            this.selectedNote.getInterval(this.selectedInterval)
           )
         }
         // or
@@ -56,7 +56,7 @@ class Gitar extends Component {
       } else if (this.selectedNote && menuItem.type === MenuItem.TYPE_INTERVAL) {
         this.selectedInterval = menuItem.selection;
         this.selectedIntervalNotes = [this.selectedNote].concat(
-          MusicNote.getForInterval(this.selectedNote, menuItem.selection)
+          this.selectedNote.getInterval(menuItem.selection)
         )
         this.selectedScale = null;
       }
@@ -99,12 +99,12 @@ class Gitar extends Component {
         return(
             <div id="gitar">
               <div id="gitar-neck">
-                {this.renderString(MusicNote.E)}
-                {this.renderString(MusicNote.B)}
-                {this.renderString(MusicNote.G)}
-                {this.renderString(MusicNote.D)}
-                {this.renderString(MusicNote.A)}
-                {this.renderString(MusicNote.E)}
+                {this.renderString(MusicNote.NOTES['E'].id)}
+                {this.renderString(MusicNote.NOTES['B'].id)}
+                {this.renderString(MusicNote.NOTES['G'].id)}
+                {this.renderString(MusicNote.NOTES['D'].id)}
+                {this.renderString(MusicNote.NOTES['A'].id)}
+                {this.renderString(MusicNote.NOTES['E'].id)}
               </div>
                 <Controller
                   intervals={MusicInterval.getIntervals()}

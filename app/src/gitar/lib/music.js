@@ -1,5 +1,3 @@
-import MusicNote from './musicnote';
-
 class Music {
 
   constructor(notes) {
@@ -12,7 +10,7 @@ class Music {
   getIntervalNotes(note, intervals) {
     const result = []
     intervals.map((interval, index) => (
-      result.push(MusicNote.getForInterval(note, interval))
+      result.push(note.getInterval(interval))
     ));
     return result;
   }

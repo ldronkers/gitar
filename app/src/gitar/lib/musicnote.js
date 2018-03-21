@@ -2,12 +2,6 @@ import { goRound } from './utils';
 
 class MusicNote {
 
-  static E = '4';
-  static B = '11';
-  static G = '7';
-  static D = '2';
-  static A = '9';
-
   static NOTE_NAMES = ['C','D','E','F','G','A','B'];
 
   static INTERVAL_NOTES_SHARP = [
@@ -100,20 +94,20 @@ class MusicNote {
     ];
   }
 
-  static getForInterval(note, interval) {
-    const intervalNames = MusicNote.getAllNotes(note);
-    const expectedNote = MusicNote.getNote(note, interval);
+  getInterval(interval) {
+    const intervalNames = this.getAllNotes(this);
+    const expectedNote = this.getNote(interval);
     let intervalNote = intervalNames[interval.semitones];
 
     if (intervalNote[0] !== expectedNote.name ) {
-      intervalNote = MusicNote.rename(intervalNote, expectedNote);
+      intervalNote = this.rename(intervalNote, expectedNote);
     }
 
     return MusicNote.instance(intervalNote);
   }
 
-  static rename(noteName, expectedNote) {
-    const notes = MusicNote.getAllNotes(expectedNote);
+  rename(noteName, expectedNote) {
+    const notes = this.getAllNotes(expectedNote);
 
     let semitones = 0;
     for (var note of notes) {
@@ -129,17 +123,17 @@ class MusicNote {
     return expectedNote.name + sign.repeat(semitones);
   }
 
-  static getNote(note, interval) {
+  getNote(interval) {
     const notes = MusicNote.NOTE_NAMES;
-    const position = notes.indexOf(note.displayName[0]);
+    const position = notes.indexOf(this.displayName[0]);
     const noteNames = goRound(notes, position);
     return MusicNote.instance(noteNames[interval.shortName.match(/[1-9]/) -1]); // refactor
   }
 
-  static getAllNotes(startingWithNote) {
-    const match = startingWithNote.displayName.match(/b/);
+  getAllNotes(note) {
+    const match = note.displayName.match(/b/);
     const notes = match ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
-    const position = notes.indexOf(startingWithNote.displayName);
+    const position = notes.indexOf(note.displayName);
     return goRound(notes, position);
   }
 
