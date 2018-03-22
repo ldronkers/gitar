@@ -20,6 +20,7 @@ class MusicNote {
     CS: new MusicNote(1, 'Db', 'C#'),
     D: new MusicNote(2, 'D'),
     CSS: new MusicNote(2, 'D', 'C##'),
+    EFF: new MusicNote(2, 'D', 'Ebb'),
     EF: new MusicNote(3, 'Eb'),
     DS: new MusicNote(3, 'Eb', 'D#'),
     E: new MusicNote(4, 'E'),
@@ -94,9 +95,9 @@ class MusicNote {
     ];
   }
 
-  getInterval(interval) {
-    const intervalNames = this.getAllNotes();
-    const expectedNote = this.getNote(interval);
+  getNote(interval) {
+    const intervalNames = this.getIntervalNotes();
+    const expectedNote = this.getExpectedNote(interval);
     let intervalNote = intervalNames[interval.semitones];
 
     if (intervalNote[0] !== expectedNote.name ) {
@@ -107,7 +108,7 @@ class MusicNote {
   }
 
   rename(noteName, expectedNote) {
-    const notes = this.getAllNotes(expectedNote);
+    const notes = this.getIntervalNotes(expectedNote);
 
     let semitones = 0;
     for (var note of notes) {
@@ -123,14 +124,14 @@ class MusicNote {
     return expectedNote.name + sign.repeat(semitones);
   }
 
-  getNote(interval) {
+  getExpectedNote(interval) {
     const notes = MusicNote.NOTE_NAMES;
     const position = notes.indexOf(this.displayName[0]);
     const noteNames = goRound(notes, position);
     return MusicNote.instance(noteNames[interval.shortName.match(/[1-9]/) -1]); // refactor
   }
 
-  getAllNotes(note=null) {
+  getIntervalNotes(note=null) {
     note = note === null ? this : note;
     const match = note.displayName.match(/b/);
     const notes = match ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;

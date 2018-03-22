@@ -34,62 +34,62 @@ describe('test guitar notes', () => {
 describe('test getting of the right note names', () => {
 
   test('get name of interval note', () => {
-    const note = MusicNote.instance('B').getInterval(MusicInterval.MAJ_2ND);
+    const note = MusicNote.instance('B').getNote(MusicInterval.MAJ_2ND);
     expect(note.displayName).toBe('C#');
   });
 
   test('f-sharp major scale, maj 7th', () => {
-    const note = MusicNote.instance('F#').getInterval(MusicInterval.MAJ_7TH);
+    const note = MusicNote.instance('F#').getNote(MusicInterval.MAJ_7TH);
     expect(note.displayName).toBe('E#');
   });
 
   test('g-sharp major scale, maj 3d', () => {
-    const note = MusicNote.instance('G#').getInterval(MusicInterval.MAJ_3RD);
+    const note = MusicNote.instance('G#').getNote(MusicInterval.MAJ_3RD);
     expect(note.displayName).toBe('B#');
   });
 
   test('g-sharp major scale, maj 6th', () => {
-    const note = MusicNote.instance('G#').getInterval(MusicInterval.MAJ_6TH);
+    const note = MusicNote.instance('G#').getNote(MusicInterval.MAJ_6TH);
     expect(note.displayName).toBe('E#');
   });
 
   test('f major scale, per 4th', () => {
-    const note = MusicNote.instance('F').getInterval(MusicInterval.PER_4TH);
+    const note = MusicNote.instance('F').getNote(MusicInterval.PER_4TH);
     expect(note.displayName).toBe('Bb');
   });
 
   test('f nat minor scale, min 3rd', () => {
-    const note =  MusicNote.instance('F').getInterval(MusicInterval.MIN_3RD);
+    const note =  MusicNote.instance('F').getNote(MusicInterval.MIN_3RD);
     expect(note.displayName).toBe('Ab');
   });
 
   test('f nat minor scale, per 4th', () => {
-    const note = MusicNote.instance('F').getInterval(MusicInterval.PER_4TH);
+    const note = MusicNote.instance('F').getNote(MusicInterval.PER_4TH);
     expect(note.displayName).toBe('Bb');
   });
 
   test('f nat minor scale, per 5th', () => {
-    const note = MusicNote.instance('F').getInterval(MusicInterval.PER_5TH);
+    const note = MusicNote.instance('F').getNote(MusicInterval.PER_5TH);
     expect(note.displayName).toBe('C');
   });
 
   test('f nat minor scale, min 6th', () => {
-    const note = MusicNote.instance('F').getInterval(MusicInterval.MIN_6TH);
+    const note = MusicNote.instance('F').getNote(MusicInterval.MIN_6TH);
     expect(note.displayName).toBe('Db');
   });
 
   test('f nat minor scale, min 7th', () => {
-    const note = MusicNote.instance('F').getInterval(MusicInterval.MIN_7TH);
+    const note = MusicNote.instance('F').getNote(MusicInterval.MIN_7TH);
     expect(note.displayName).toBe('Eb');
   });
 
   test('Ab major scale, per 4tth', () => {
-    const note = MusicNote.instance('Ab').getInterval(MusicInterval.PER_4TH);
+    const note = MusicNote.instance('Ab').getNote(MusicInterval.PER_4TH);
     expect(note.displayName).toBe('Db');
   });
 
   test('Db major scale, dim 5th', () => {
-    const note = MusicNote.instance('Db').getInterval(MusicInterval.DIM_5TH);
+    const note = MusicNote.instance('Db').getNote(MusicInterval.DIM_5TH);
     expect(note.displayName).toBe('Abb');
   });
 

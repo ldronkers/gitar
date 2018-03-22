@@ -10,7 +10,7 @@ class Music {
   getIntervalNotes(note, intervals) {
     const result = []
     intervals.map((interval, index) => (
-      result.push(note.getInterval(interval))
+      result.push(note.getNote(interval))
     ));
     return result;
   }
