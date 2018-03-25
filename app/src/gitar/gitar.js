@@ -10,6 +10,7 @@ class Gitar extends Component {
     constructor() {
       super()
 
+      this.show = 'sharps';
       this.selectedNote = null;
       this.selectedInterval = null
       this.selectedScale = null;
@@ -72,11 +73,11 @@ class Gitar extends Component {
     }
 
     handleNoteTypes(e){
-      let notes = MusicNote.getNotes()
-      if (e.target.text === 'sharps') {
-        notes = MusicNote.getNotesLeft();
+      if (e.target.text === 'flats') {
+        this.show = 'flats';
       }
-      this.setState({notes: notes});
+      this.show = 'sharps';
+      this.setState({show: this.show});
     }
 
     getStringNotes(note) {
