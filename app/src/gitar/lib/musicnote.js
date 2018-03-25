@@ -41,6 +41,7 @@ class MusicNote {
     BF: new MusicNote(10, 'Bb'),
     AS: new MusicNote(10, 'Bb', 'A#'),
     B: new MusicNote(11, 'B'),
+    ASS: new MusicNote(11, 'B', 'A##'),
     CF: new MusicNote(11, 'B', 'Cb')
   }
 
@@ -96,7 +97,7 @@ class MusicNote {
   }
 
   getNote(interval) {
-    const intervalNames = this.getIntervalNotes();
+    const intervalNames = this.getIntervals();
     const expectedNote = this.getExpectedNote(interval);
     let intervalNote = intervalNames[interval.semitones];
 
@@ -108,7 +109,7 @@ class MusicNote {
   }
 
   rename(noteName, expectedNote) {
-    const notes = this.getIntervalNotes(expectedNote);
+    const notes = this.getIntervals(expectedNote);
 
     let semitones = 0;
     for (var note of notes) {
@@ -131,12 +132,20 @@ class MusicNote {
     return MusicNote.instance(noteNames[interval.shortName.match(/[1-9]/) -1]); // refactor
   }
 
-  getIntervalNotes(note=null) {
+  getIntervals(note=null) {
     note = note === null ? this : note;
     const match = note.displayName.match(/b/);
     const notes = match ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
     const position = notes.indexOf(note.displayName);
     return goRound(notes, position);
+  }
+
+  getIntervalNotes() {
+    let result = []
+    for (let note of this.getIntervals()) {
+      result.push(MusicNote.instance(note))
+    }
+    return result;
   }
 
   get unsignedName() {

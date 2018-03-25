@@ -3,10 +3,10 @@ import MusicInterval from './musicinterval';
 
 describe('test guitar notes', () => {
 
-  test('get note', () => {
+  test('get note name', () => {
     const notes = [
-      {name: 'B#', note: new MusicNote(0, 'C', 'B#')},
-      {name: 'E#', note: new MusicNote(5, 'F', 'E#')},
+      {name: 'B#', note: MusicNote.instance('B#')},
+      {name: 'E#', note: MusicNote.instance('E#')},
     ];
 
     for (let i = 0; i < notes.length; i++) {
@@ -16,8 +16,8 @@ describe('test guitar notes', () => {
 
   test('get display name', () => {
     const notes = [
-      {name: 'B#', note: new MusicNote(0, 'C', 'B#')},
-      {name: 'E#', note: new MusicNote(5, 'F', 'E#')},
+      {name: 'B#', note: MusicNote.instance('B#')},
+      {name: 'E#', note: MusicNote.instance('E#')},
     ];
 
     for (let i = 0; i < notes.length; i++) {
@@ -27,7 +27,7 @@ describe('test guitar notes', () => {
 
   test('getNotes', () => {
     const notes = MusicNote.getNotes();
-    expect(notes[0]).toEqual(new MusicNote(0, 'C'));
+    expect(notes[0]).toEqual(MusicNote.instance('C'));
   });
 });
 

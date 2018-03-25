@@ -82,11 +82,17 @@ class Gitar extends Component {
       this.setState({music: this.music});
     }
 
-    renderString(index) {
-      const stringNotes = this.music.getStringNotes(index);
+    getStringNotes(note) {
+      let notes = note.getIntervalNotes();
+      notes = notes.slice(1).concat(notes[0])
+      return notes;
+    }
+
+    renderString(note) {
+      const stringNotes = this.getStringNotes(note);
       return (
         <String
-          name={this.music.notes[index].name}
+          name={note.name}
           selectedNote={this.state.selectedNote}
           intervalNotes={this.state.selectedIntervalNotes}
           notes={stringNotes}
@@ -99,12 +105,12 @@ class Gitar extends Component {
         return(
             <div id="gitar">
               <div id="gitar-neck">
-                {this.renderString(MusicNote.NOTES['E'].id)}
-                {this.renderString(MusicNote.NOTES['B'].id)}
-                {this.renderString(MusicNote.NOTES['G'].id)}
-                {this.renderString(MusicNote.NOTES['D'].id)}
-                {this.renderString(MusicNote.NOTES['A'].id)}
-                {this.renderString(MusicNote.NOTES['E'].id)}
+                {this.renderString(MusicNote.instance('E'))}
+                {this.renderString(MusicNote.instance('B'))}
+                {this.renderString(MusicNote.instance('G'))}
+                {this.renderString(MusicNote.instance('D'))}
+                {this.renderString(MusicNote.instance('A'))}
+                {this.renderString(MusicNote.instance('E'))}
               </div>
                 <Controller
                   intervals={MusicInterval.getIntervals()}

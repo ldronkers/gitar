@@ -4,10 +4,9 @@ class Note extends Component {
     getClassName() {
       let result = 'note-label';
       if (this.props.selectedNote
-        && (this.props.selectedNote.id === this.props.note.id)) {
+        && (this.props.selectedNote.name === this.props.note.name)) {
         result += ' root';
-      } else if (this.props.isIntervalNote || (this.props.intervalNote &&
-        (this.props.intervalNote.id === this.props.note.id))) {
+      } else if (this.props.isIntervalNote) {
         result += ' interval'
       }
       return result;

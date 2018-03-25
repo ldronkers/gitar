@@ -14,18 +14,6 @@ class Music {
     ));
     return result;
   }
-
-  /**
-  * Get notes for string E (index)
-  * But as string start with the followin (E => F)
-  * the first element is 'sliced'
-  */
-  getStringNotes(index) {
-    const keyNnotes = this.notes.slice(index, 12)
-    const prependingNotes = this.notes.slice(0, index)
-    const notes = keyNnotes.concat(prependingNotes, [this.notes[index]])
-    return notes.slice(1);
-  }
 }
 
 export default Music;
