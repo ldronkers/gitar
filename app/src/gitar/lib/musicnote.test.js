@@ -31,6 +31,16 @@ describe('test guitar notes', () => {
   });
 });
 
+test('get interval notes', () => {
+  const intervals = [MusicInterval.PER_4TH, MusicInterval.PER_5TH];
+  const expectedNotes = [
+    MusicNote.instance('A'), MusicNote.instance('B')
+  ];
+  expect(
+    MusicNote.instance('E').getIntervalNotes(intervals)
+  ).toEqual(expectedNotes)
+});
+
 describe('test getting of the right note names', () => {
 
   test('get name of interval note', () => {

@@ -140,11 +140,19 @@ class MusicNote {
     return goRound(notes, position);
   }
 
-  getIntervalNotes() {
+  getIntervalNotes(intervals=null) {
     let result = []
-    for (let note of this.getIntervals()) {
-      result.push(MusicNote.instance(note))
+
+    if (!intervals) {
+      for (let note of this.getIntervals()) {
+        result.push(MusicNote.instance(note))
+      }
+    } else {
+      intervals.map((interval, index) => (
+        result.push(this.getNote(interval))
+      ));
     }
+
     return result;
   }
 

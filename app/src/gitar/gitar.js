@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import String from './string';
 import Controller from './controller/controller'
-import Music from './lib/music.js';
 import MusicNote from './lib/musicnote.js';
 import MusicInterval from './lib/musicinterval.js';
 import MusicScale from './lib/musicscale.js';
@@ -10,7 +9,6 @@ import { MenuItem } from './lib/control';
 class Gitar extends Component {
     constructor() {
       super()
-      this.music = new Music(MusicNote.getNotesLeft());
 
       this.selectedNote = null;
       this.selectedInterval = null
@@ -37,8 +35,8 @@ class Gitar extends Component {
         // or
         if (this.selectedScale) {
           const scale = MusicScale.getScale(this.selectedScale.name);
-          this.selectedIntervalNotes = this.music.getIntervalNotes(
-            this.selectedNote, scale.intervals
+          this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
+            scale.intervals
           );
         }
 
@@ -48,8 +46,8 @@ class Gitar extends Component {
         const scale = MusicScale.getScale(menuItem.selection);
         this.selectedScale = scale;
 
-        this.selectedIntervalNotes = this.music.getIntervalNotes(
-          this.selectedNote, scale.intervals
+        this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
+          scale.intervals
         );
         this.selectedInterval = null;
 
@@ -74,12 +72,11 @@ class Gitar extends Component {
     }
 
     handleNoteTypes(e){
+      let notes = MusicNote.getNotes()
       if (e.target.text === 'sharps') {
-        this.music = new Music(MusicNote.getNotesLeft());
-      } else {
-        this.music = new Music(MusicNote.getNotes());
+        notes = MusicNote.getNotesLeft();
       }
-      this.setState({music: this.music});
+      this.setState({notes: notes});
     }
 
     getStringNotes(note) {
