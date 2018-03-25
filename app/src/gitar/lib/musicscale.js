@@ -1,18 +1,6 @@
-import Music from './music';
-import MusicNote from './musicnote';
 import MusicInterval from './musicinterval';
 
 class MusicScale {
-
-  constructor(note, intervals) {
-    this.note = note
-    this.intervals = intervals;
-  }
-
-  getNotes() {
-    const music = new Music(MusicNote.getNotes());
-    return music.getIntervalNotes(this.note, this.intervals);
-  }
 
   static MODE_IONIAN = {
     name: 'Ionian',
