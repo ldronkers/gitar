@@ -24,11 +24,6 @@ describe('test guitar notes', () => {
       expect(MusicNote.instance(notes[i].name).displayName).toEqual(notes[i].note.displayName);
     }
   });
-
-  test('getNotes', () => {
-    const notes = MusicNote.getNotes();
-    expect(notes[0]).toEqual(MusicNote.instance('C'));
-  });
 });
 
 test('get interval notes', () => {

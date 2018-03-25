@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import String from './string';
-import Controller from './controller/controller'
+import GitarString from './lib/gitarstring';
+import Controller from './controller/controller';
 import MusicNote from './lib/musicnote.js';
 import MusicInterval from './lib/musicinterval.js';
 import MusicScale from './lib/musicscale.js';
@@ -17,6 +18,7 @@ class Gitar extends Component {
       this.selectedIntervalNotes = [] // result of selecting, int or scale
 
       this.state = {
+        show: this.show,
         selectedNote: this.selectedNote,
         selectedInterval: this.selectedInterval,
         selectedScale: this.selectedScale,
@@ -75,25 +77,20 @@ class Gitar extends Component {
     handleNoteTypes(e){
       if (e.target.text === 'flats') {
         this.show = 'flats';
+      } else {
+        this.show = 'sharps';
       }
-      this.show = 'sharps';
       this.setState({show: this.show});
     }
 
-    getStringNotes(note) {
-      let notes = note.getIntervalNotes();
-      notes = notes.slice(1).concat(notes[0])
-      return notes;
-    }
-
     renderString(note) {
-      const stringNotes = this.getStringNotes(note);
+      const gitarString = new GitarString(note);
       return (
         <String
           name={note.name}
           selectedNote={this.state.selectedNote}
           intervalNotes={this.state.selectedIntervalNotes}
-          notes={stringNotes}
+          notes={gitarString.getNotes(this.state.show)}
           handleNoteSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}>
         </String>
       )

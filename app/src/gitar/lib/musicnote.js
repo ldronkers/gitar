@@ -62,40 +62,6 @@ class MusicNote {
     }
   }
 
-  static getNotes() {
-    return [
-      MusicNote.NOTES['C'],
-      MusicNote.NOTES['DF'],
-      MusicNote.NOTES['D'],
-      MusicNote.NOTES['EF'],
-      MusicNote.NOTES['E'],
-      MusicNote.NOTES['F'],
-      MusicNote.NOTES['GF'],
-      MusicNote.NOTES['G'],
-      MusicNote.NOTES['AF'],
-      MusicNote.NOTES['A'],
-      MusicNote.NOTES['BF'],
-      MusicNote.NOTES['B'],
-    ];
-  }
-
-  static getNotesLeft() {
-    return [
-      MusicNote.NOTES['C'],
-      MusicNote.NOTES['CS'],
-      MusicNote.NOTES['D'],
-      MusicNote.NOTES['DS'],
-      MusicNote.NOTES['E'],
-      MusicNote.NOTES['F'],
-      MusicNote.NOTES['FS'],
-      MusicNote.NOTES['G'],
-      MusicNote.NOTES['GS'],
-      MusicNote.NOTES['A'],
-      MusicNote.NOTES['AS'],
-      MusicNote.NOTES['B']
-    ];
-  }
-
   getNote(interval) {
     const intervalNames = this.getIntervals();
     const expectedNote = this.getExpectedNote(interval);
