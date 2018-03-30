@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Note from './note'
-import { NotesMenuItem } from './lib/control'
 
 class String extends Component {
 
@@ -20,7 +19,7 @@ class String extends Component {
             selectedNote={this.props.selectedNote}
             isIntervalNote={this.getIntervalNote(note) ? true : false}
             note={this.getIntervalNote(note) ? this.getIntervalNote(note) : note}
-            onClicked={(note) => {this.props.handleNoteSelection(new NotesMenuItem(note))}}>
+            onClicked={(note) => {this.props.handleNoteSelection(note)}}>
           </Note>
         ))
       )

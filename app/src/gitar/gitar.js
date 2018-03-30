@@ -5,7 +5,6 @@ import Controller from './controller/controller';
 import MusicNote from './lib/musicnote.js';
 import MusicInterval from './lib/musicinterval.js';
 import MusicScale from './lib/musicscale.js';
-import { MenuItem } from './lib/control';
 
 class Gitar extends Component {
     constructor() {
@@ -15,7 +14,7 @@ class Gitar extends Component {
       this.renameNotes = true;
       this.selectedNote = null;
       this.selectedInterval = null
-      this.selectedScale = null;
+      this.selectedIntervals = []
       this.selectedIntervalNotes = []
 
       this.state = {
@@ -23,55 +22,34 @@ class Gitar extends Component {
         selectedNote: this.selectedNote,
         selectedInterval: this.selectedInterval,
         selectedScale: this.selectedScale,
+        selectedIntervals: this.selectedIntervals,
         selectedIntervalNotes: this.selectedIntervalNotes,
       };
     }
 
-    handleMenuSelection(menuItem) {
-      if (menuItem.type === MenuItem.TYPE_NOTE) {
-        this.selectedNote = menuItem.selection;
-        if (this.selectedInterval) {
-          this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
-            [this.selectedInterval], this.renameNotes
-          );
-        }
-        // or
-        if (this.selectedScale) {
-          const scale = MusicScale.getScale(this.selectedScale.name);
-          this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
-            scale.intervals, this.renameNotes
-          );
-        }
+    handleNoteSelection(note) {
+      this.selectedNote = note;
 
-      } else if (this.selectedNote &&
-        menuItem.type === MenuItem.TYPE_SCALE && menuItem.selection
-      ) {
-        const scale = MusicScale.getScale(menuItem.selection);
-        this.selectedScale = scale;
-
-        this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
-          scale.intervals, this.renameNotes
-        );
-        this.selectedInterval = null;
-
-      } else if (this.selectedNote && menuItem.type === MenuItem.TYPE_INTERVAL) {
-        this.selectedInterval = menuItem.selection;
-        this.selectedIntervalNotes = [this.selectedNote].concat(
-          this.selectedNote.getNote(menuItem.selection)
-        )
-        this.selectedScale = null;
+      if(this.selectedIntervals.length > 0){
+        this.handleIntervalsSelection(this.selectedIntervals)
+      } else {
+        this.updateState();
       }
-
-      this.updateState()
     }
 
-    updateState() {
-      this.setState({
-        selectedNote: this.selectedNote,
-        selectedInterval: this.selectedInterval,
-        selectedScale: this.selectedScale,
-        selectedIntervalNotes: this.selectedIntervalNotes,
-      });
+    handleIntervalsSelection(intervals) {
+      if(this.selectedNote) {
+        this.selectedIntervals = intervals;
+        if(intervals.length === 1) {
+          this.selectedInterval = intervals[0];
+        }
+
+        this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
+          intervals, this.renameNotes
+        );
+
+        this.updateState();
+      }
     }
 
     handleNoteTypes(e) {
@@ -83,6 +61,14 @@ class Gitar extends Component {
       this.renameNotes = e.target.checked;
     }
 
+    updateState() {
+      this.setState({
+        selectedNote: this.selectedNote,
+        selectedInterval: this.selectedInterval,
+        selectedIntervalNotes: this.selectedIntervalNotes,
+      });
+    }
+
     renderString(note) {
       const gitarString = new GitarString(note);
       return (
@@ -91,7 +77,7 @@ class Gitar extends Component {
           selectedNote={this.state.selectedNote}
           intervalNotes={this.state.selectedIntervalNotes}
           notes={gitarString.getNotes(this.state.show)}
-          handleNoteSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}>
+          handleNoteSelection={(note)=>{this.handleNoteSelection(note)}}>
         </String>
       )
     }
@@ -114,7 +100,8 @@ class Gitar extends Component {
                 triads={MusicScale.getTriads()}
                 arpeggios={MusicScale.getArpeggios()}
                 selectedInterval={this.state.selectedInterval}
-                handleMenuSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}
+                handleIntervalsSelection={(intervals)=>{this.handleIntervalsSelection(intervals)}}
+                handleNoteSelection={(note)=>{this.handleNoteSelection(note)}}
                 handleRenameNotes={(e)=>{this.handleRenameNotes(e)}}
                 renameNotes={this.renameNotes}
                 handleNoteTypes={(e)=>{this.handleNoteTypes(e)}}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import IntervalButton from './intervalbutton'
-import { ScalesMenuItem, IntervalsMenuItem} from '../lib/control'
+import IntervalButton from './intervalbutton';
+import MusicScale from '../lib/musicscale';
 
 class Conroller extends Component {
     handleIntervals(intervals) {
@@ -9,7 +9,7 @@ class Conroller extends Component {
           <IntervalButton key={interval.shortName}
             interval={interval}
             selectedInterval={this.props.selectedInterval}
-            onClicked={(interval) => {this.props.handleMenuSelection(new IntervalsMenuItem(interval))}}>
+            onClicked={(intervals) => {this.props.handleIntervalsSelection([interval])}}>
           </IntervalButton>
         ))
       )
@@ -20,7 +20,9 @@ class Conroller extends Component {
         <option key={index} value={item.name}>{item.name}</option>
       ))
       return (
-        <select onChange={(e) => {this.props.handleMenuSelection(new ScalesMenuItem(e.target.value))}}>
+        <select onChange={(intervals) => {this.props.handleIntervalsSelection(
+          MusicScale.getScale(intervals.target.value).intervals
+        )}}>
           <option value="">Select a scale</option>
             {options}
         </select>

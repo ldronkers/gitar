@@ -7,7 +7,7 @@ class IntervalButton extends Component {
     }
     render(){
         return(
-            <div onClick={()=>{this.props.onClicked(this.props.interval)}} className="interval-button">
+            <div onClick={this.props.onClicked} className="interval-button">
               <span className={"interval " + (this.isSelected() ? 'selected' : '')}>{this.props.interval.shortName}</span>
             </div>
         );
