@@ -32,9 +32,9 @@ class Gitar extends Component {
       if (menuItem.type === MenuItem.TYPE_NOTE) {
         this.selectedNote = menuItem.selection;
         if (this.selectedInterval) {
-          this.selectedIntervalNotes = [this.selectedNote].concat(
-            this.selectedNote.getNote(this.selectedInterval, this.renameNotes)
-          )
+          this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
+            [this.selectedInterval], this.renameNotes
+          );
         }
         // or
         if (this.selectedScale) {
