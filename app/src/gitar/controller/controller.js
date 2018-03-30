@@ -46,6 +46,16 @@ class Conroller extends Component {
                 <div className="scale-selection">
                  <span className="scale-selection-label">Arpeggios: </span>{this.renderScales(this.props.arpeggios)}
                 </div>
+                <div className="renameNotes">
+                  <input
+                    type="checkbox"
+                    id="renameNotes"
+                    value="rename"
+                    defaultChecked={this.props.renameNotes}
+                    onChange={this.props.handleRenameNotes}
+                    />
+                  <label htmlFor="renameNotes">rename notes</label>
+                </div>
                 <div className="flatsharpes">
                     <a href="#sharps" onClick={(e) => {this.props.handleNoteTypes(e)}}>sharps</a> | <a href="#flats" onClick={(e) => {this.props.handleNoteTypes(e)}}>flats</a>
                 </div>

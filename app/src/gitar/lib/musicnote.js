@@ -62,12 +62,12 @@ class MusicNote {
     }
   }
 
-  getNote(interval) {
+  getNote(interval, renameNotes=true) {
     const intervalNames = this.getIntervals();
     const expectedNote = this.getExpectedNote(interval);
     let intervalNote = intervalNames[interval.semitones];
 
-    if (intervalNote[0] !== expectedNote.name ) {
+    if (renameNotes && (intervalNote[0] !== expectedNote.name) ) {
       intervalNote = this.rename(intervalNote, expectedNote);
     }
 
@@ -106,7 +106,7 @@ class MusicNote {
     return goRound(notes, position);
   }
 
-  getIntervalNotes(intervals=null) {
+  getIntervalNotes(intervals=null, renameNotes=true) {
     let result = []
 
     if (!intervals) {
@@ -115,7 +115,7 @@ class MusicNote {
       }
     } else {
       intervals.map((interval, index) => (
-        result.push(this.getNote(interval))
+        result.push(this.getNote(interval, renameNotes))
       ));
     }
 

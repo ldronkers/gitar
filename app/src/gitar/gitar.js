@@ -12,6 +12,7 @@ class Gitar extends Component {
       super()
 
       this.show = 'sharps';
+      this.renameNotes = true;
       this.selectedNote = null;
       this.selectedInterval = null
       this.selectedScale = null;
@@ -32,14 +33,14 @@ class Gitar extends Component {
         this.selectedNote = menuItem.selection;
         if (this.selectedInterval) {
           this.selectedIntervalNotes = [this.selectedNote].concat(
-            this.selectedNote.getNote(this.selectedInterval)
+            this.selectedNote.getNote(this.selectedInterval, this.renameNotes)
           )
         }
         // or
         if (this.selectedScale) {
           const scale = MusicScale.getScale(this.selectedScale.name);
           this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
-            scale.intervals
+            scale.intervals, this.renameNotes
           );
         }
 
@@ -50,7 +51,7 @@ class Gitar extends Component {
         this.selectedScale = scale;
 
         this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
-          scale.intervals
+          scale.intervals, this.renameNotes
         );
         this.selectedInterval = null;
 
@@ -74,13 +75,13 @@ class Gitar extends Component {
       });
     }
 
-    handleNoteTypes(e){
-      if (e.target.text === 'flats') {
-        this.show = 'flats';
-      } else {
-        this.show = 'sharps';
-      }
+    handleNoteTypes(e) {
+      this.show = e.target.text;
       this.setState({show: this.show});
+    }
+
+    handleRenameNotes(e) {
+      this.renameNotes = e.target.checked;
     }
 
     renderString(note) {
@@ -115,6 +116,8 @@ class Gitar extends Component {
                   arpeggios={MusicScale.getArpeggios()}
                   selectedInterval={this.state.selectedInterval}
                   handleMenuSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}
+                  handleRenameNotes={(e)=>{this.handleRenameNotes(e)}}
+                  renameNotes={this.renameNotes}
                   handleNoteTypes={(e)=>{this.handleNoteTypes(e)}}
                   />
             </div>
