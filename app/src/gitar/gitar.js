@@ -16,7 +16,7 @@ class Gitar extends Component {
       this.selectedNote = null;
       this.selectedInterval = null
       this.selectedScale = null;
-      this.selectedIntervalNotes = [] // result of selecting, int or scale
+      this.selectedIntervalNotes = []
 
       this.state = {
         show: this.show,
@@ -24,7 +24,6 @@ class Gitar extends Component {
         selectedInterval: this.selectedInterval,
         selectedScale: this.selectedScale,
         selectedIntervalNotes: this.selectedIntervalNotes,
-        selectedMenuItem: {}, // not sure if we need this
       };
     }
 
@@ -108,18 +107,18 @@ class Gitar extends Component {
                 {this.renderString(MusicNote.instance('A'))}
                 {this.renderString(MusicNote.instance('E'))}
               </div>
-                <Controller
-                  intervals={MusicInterval.getIntervals()}
-                  scales={MusicScale.getScales()}
-                  modes={MusicScale.getModes()}
-                  triads={MusicScale.getTriads()}
-                  arpeggios={MusicScale.getArpeggios()}
-                  selectedInterval={this.state.selectedInterval}
-                  handleMenuSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}
-                  handleRenameNotes={(e)=>{this.handleRenameNotes(e)}}
-                  renameNotes={this.renameNotes}
-                  handleNoteTypes={(e)=>{this.handleNoteTypes(e)}}
-                  />
+              <Controller
+                intervals={MusicInterval.getIntervals()}
+                scales={MusicScale.getScales()}
+                modes={MusicScale.getModes()}
+                triads={MusicScale.getTriads()}
+                arpeggios={MusicScale.getArpeggios()}
+                selectedInterval={this.state.selectedInterval}
+                handleMenuSelection={(menuItem)=>{this.handleMenuSelection(menuItem)}}
+                handleRenameNotes={(e)=>{this.handleRenameNotes(e)}}
+                renameNotes={this.renameNotes}
+                handleNoteTypes={(e)=>{this.handleNoteTypes(e)}}
+              />
             </div>
         );
     }
