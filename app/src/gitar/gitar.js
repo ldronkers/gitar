@@ -29,17 +29,17 @@ class Gitar extends Component {
 
     handleNoteSelection(note) {
       this.selectedNote = note;
+      this.setState({selectedNote: this.selectedNote});
 
       if(this.selectedIntervals.length > 0){
         this.handleIntervalsSelection(this.selectedIntervals)
-      } else {
-        this.updateState();
-      }
+      } 
     }
 
     handleIntervalsSelection(intervals) {
       if(this.selectedNote) {
         this.selectedIntervals = intervals;
+
         if(intervals.length === 1) {
           this.selectedInterval = intervals[0];
         }
