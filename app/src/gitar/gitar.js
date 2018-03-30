@@ -96,10 +96,10 @@ class Gitar extends Component {
                 triads={MusicScale.getTriads()}
                 arpeggios={MusicScale.getArpeggios()}
                 selectedInterval={this.state.selectedInterval}
+                renameNotes={this.renameNotes}
                 handleIntervalsSelection={(intervals)=>{this.handleIntervalsSelection(intervals)}}
                 handleNoteSelection={(note)=>{this.handleNoteSelection(note)}}
                 handleRenameNotes={(e)=>{this.handleRenameNotes(e)}}
-                renameNotes={this.renameNotes}
                 handleNoteTypes={(e)=>{this.handleNoteTypes(e)}}
               />
             </div>

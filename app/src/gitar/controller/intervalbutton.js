@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 
 class IntervalButton extends Component {
-    isSelected() {
-      return this.props.selectedInterval &&
-        this.props.selectedInterval.shortName === this.props.interval.shortName
-    }
     render(){
         return(
             <div onClick={this.props.onClicked} className="interval-button">
-              <span className={"interval " + (this.isSelected() ? 'selected' : '')}>{this.props.interval.shortName}</span>
+              <span className={"interval " + (this.props.selected ? 'selected' : '')}>{this.props.interval.shortName}</span>
             </div>
         );
     }

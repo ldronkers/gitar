@@ -3,11 +3,18 @@ import IntervalButton from './intervalbutton';
 import MusicScale from '../lib/musicscale';
 
 class Conroller extends Component {
-    handleIntervals(intervals) {
+
+    isSelectedInterval(interval) {
+        return this.props.selectedInterval &&
+          this.props.selectedInterval.shortName === interval.shortName
+    }
+
+    renderleIntervals(intervals) {
       return (
         intervals.map((interval, index) => (
           <IntervalButton key={interval.shortName}
             interval={interval}
+            selected={this.isSelectedInterval(interval)}
             selectedInterval={this.props.selectedInterval}
             onClicked={(intervals) => {this.props.handleIntervalsSelection([interval])}}>
           </IntervalButton>
@@ -33,7 +40,7 @@ class Conroller extends Component {
         return(
             <div id="controller">
               <div className="intervals">
-                {this.handleIntervals(this.props.intervals)}
+                {this.renderleIntervals(this.props.intervals)}
                 </div>
               <div className="scales">
                 <div className="scale-selection">
@@ -49,10 +56,7 @@ class Conroller extends Component {
                  <span className="scale-selection-label">Arpeggios: </span>{this.renderScales(this.props.arpeggios)}
                 </div>
                 <div className="renameNotes">
-                  <input
-                    type="checkbox"
-                    id="renameNotes"
-                    value="rename"
+                  <input type="checkbox" id="renameNotes" value="rename"
                     defaultChecked={this.props.renameNotes}
                     onChange={this.props.handleRenameNotes}
                     />
