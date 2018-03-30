@@ -10,7 +10,6 @@ class Gitar extends Component {
     constructor() {
       super()
 
-      this.show = 'sharps';
       this.renameNotes = true;
       this.selectedNote = null;
       this.selectedInterval = null
@@ -18,7 +17,6 @@ class Gitar extends Component {
       this.selectedIntervalNotes = []
 
       this.state = {
-        show: this.show,
         selectedNote: this.selectedNote,
         selectedInterval: this.selectedInterval,
         selectedScale: this.selectedScale,
@@ -33,13 +31,13 @@ class Gitar extends Component {
 
       if(this.selectedIntervals.length > 0){
         this.handleIntervalsSelection(this.selectedIntervals)
-      } 
+      }
     }
 
     handleIntervalsSelection(intervals) {
-      if(this.selectedNote) {
-        this.selectedIntervals = intervals;
+      this.selectedIntervals = intervals;
 
+      if(this.selectedNote) {
         if(intervals.length === 1) {
           this.selectedInterval = intervals[0];
         }
@@ -53,8 +51,7 @@ class Gitar extends Component {
     }
 
     handleNoteTypes(e) {
-      this.show = e.target.text;
-      this.setState({show: this.show});
+      this.setState({show: e.target.text});
     }
 
     handleRenameNotes(e) {
@@ -63,7 +60,6 @@ class Gitar extends Component {
 
     updateState() {
       this.setState({
-        selectedNote: this.selectedNote,
         selectedInterval: this.selectedInterval,
         selectedIntervalNotes: this.selectedIntervalNotes,
       });
