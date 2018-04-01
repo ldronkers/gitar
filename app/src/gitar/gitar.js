@@ -13,7 +13,7 @@ class Gitar extends Component {
       this.renameNotes = true;
       this.selectedNote = null;
       this.selectedInterval = null
-      this.selectedIntervals = []
+      this._selectedIntervals = []
       this.selectedIntervalNotes = []
 
       this.state = {
@@ -25,28 +25,35 @@ class Gitar extends Component {
       };
     }
 
-    handleNoteSelection(note) {
-      this.selectedNote = note;
-      this.setState({selectedNote: this.selectedNote});
-
-      if(this.selectedIntervals.length > 0){
-        this.handleIntervalsSelection(this.selectedIntervals)
+    set selectedIntervals(intervals) {
+      this._selectedIntervals = intervals;
+      if(intervals.length === 1) {
+        this.selectedInterval = intervals[0];
       }
     }
 
-    handleIntervalsSelection(intervals) {
-      this.selectedIntervals = intervals;
+    get selectedIntervals() {
+      return this._selectedIntervals;
+    }
 
+    handleNoteSelection(note) {
+      this.selectedNote = note;
+      this.setState({selectedNote: this.selectedNote});
+      this.updateNeck()
+    }
+
+    handleIntervalsSelection(intervals) {
       if(this.selectedNote) {
-        if(intervals.length === 1) {
-          this.selectedInterval = intervals[0];
-        }
+        this.selectedIntervals = intervals;
 
         this.selectedIntervalNotes = this.selectedNote.getIntervalNotes(
           intervals, this.renameNotes
         );
 
-        this.updateState();
+        this.setState({
+          selectedInterval: this.selectedInterval,
+          selectedIntervalNotes: this.selectedIntervalNotes,
+        });
       }
     }
 
@@ -56,13 +63,13 @@ class Gitar extends Component {
 
     handleRenameNotes(e) {
       this.renameNotes = e.target.checked;
+      this.updateNeck()
     }
 
-    updateState() {
-      this.setState({
-        selectedInterval: this.selectedInterval,
-        selectedIntervalNotes: this.selectedIntervalNotes,
-      });
+    updateNeck() {
+      if(this.selectedIntervals.length > 0){
+        this.handleIntervalsSelection(this.selectedIntervals)
+      }
     }
 
     renderString(note) {
