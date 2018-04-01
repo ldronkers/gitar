@@ -77,7 +77,7 @@ class MusicNote {
   }
 
   rename(noteName, expectedNote) {
-    const notes = this.getIntervals(expectedNote);
+    const notes = expectedNote.getIntervals();
 
     let semitones = 0;
     for (var note of notes) {
@@ -100,11 +100,10 @@ class MusicNote {
     return MusicNote.instance(noteNames[interval.shortName.match(/[1-9]/) -1]); // refactor
   }
 
-  getIntervals(note=null) {
-    note = note === null ? this : note;
-    const match = note.displayName.match(/b/);
+  getIntervals() {
+    const match = this.displayName.match(/b/);
     const notes = match ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
-    const position = notes.indexOf(note.displayName);
+    const position = notes.indexOf(this.displayName);
     return goRound(notes, position);
   }
 
