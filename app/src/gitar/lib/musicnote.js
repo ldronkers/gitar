@@ -18,6 +18,7 @@ class MusicNote {
     BS: new MusicNote(0, 'C', 'B#'),
     DF: new MusicNote(1, 'Db'),
     CS: new MusicNote(1, 'Db', 'C#'),
+    BSS: new MusicNote(1, 'Db', 'B##'),
     D: new MusicNote(2, 'D'),
     CSS: new MusicNote(2, 'D', 'C##'),
     EFF: new MusicNote(2, 'D', 'Ebb'),
@@ -30,13 +31,14 @@ class MusicNote {
     ES: new MusicNote(5, 'F', 'E#'),
     GF: new MusicNote(6, 'Gb'),
     FS: new MusicNote(6, 'Gb', 'F#'),
+    ESS: new MusicNote(6, 'Gb', 'E##'),
     G: new MusicNote(7, 'G'),
     AFF: new MusicNote(7, 'G', 'Abb'),
     FSS: new MusicNote(7, 'G', 'F##'),
     AF: new MusicNote(8, 'Ab'),
     GS: new MusicNote(8, 'Ab', 'G#'),
     A: new MusicNote(9, 'A'),
-    BFF: new MusicNote(9, 'Bbb'),
+    BFF: new MusicNote(9, 'A', 'Bbb'),
     GSS: new MusicNote(9, 'A', 'G##'),
     BF: new MusicNote(10, 'Bb'),
     AS: new MusicNote(10, 'Bb', 'A#'),
@@ -63,7 +65,7 @@ class MusicNote {
   }
 
   getNote(interval, rename=true) {
-    const intervalNames = this.getIntervals();
+    const intervalNames = this.getAllIntervalNames();
     let intervalNote = intervalNames[interval.semitones];
 
     if (rename) {
@@ -77,7 +79,7 @@ class MusicNote {
   }
 
   rename(noteName, expectedNote) {
-    const notes = expectedNote.getIntervals();
+    const notes = expectedNote.getAllIntervalNames();
 
     let semitones = 0;
     for (var note of notes) {
@@ -100,10 +102,13 @@ class MusicNote {
     return MusicNote.instance(noteNames[interval.shortName.match(/[1-9]/) -1]); // refactor
   }
 
-  getIntervals() {
+  // ESS: new MusicNote(6, 'Gb', 'E##'),
+  // Notes sharp, but name is Gb causing 111 to be -1 still
+  getAllIntervalNames() {
     const match = this.displayName.match(/b/);
     const notes = match ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
-    const position = notes.indexOf(this.displayName);
+    let position = notes.indexOf(this.displayName);
+    position = position === -1 ? MusicNote.INTERVAL_NOTES_FLAT.indexOf(this.name) : position;
     return goRound(notes, position);
   }
 

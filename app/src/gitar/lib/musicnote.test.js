@@ -3,6 +3,30 @@ import MusicInterval from './musicinterval';
 
 describe('test guitar notes', () => {
 
+  test('get notes', () => {
+    const note = MusicNote.instance('E#');
+    const notes = note.getAllIntervalNames();
+    expect(notes[0]).toBe('F');
+  });
+
+  test('get notes for A##', () => {
+    const note = MusicNote.instance('A##');
+    const notes = note.getAllIntervalNames();
+    expect(notes[0]).toBe('B');
+  });
+
+  test('get notes for Ebb', () => {
+    const note = MusicNote.instance('Ebb');
+    const notes = note.getAllIntervalNames();
+    expect(notes[0]).toBe('D');
+  });
+
+  test('get notes for C##', () => {
+    const note = MusicNote.instance('C##');
+    const notes = note.getAllIntervalNames();
+    expect(notes[0]).toBe('D');
+  });
+
   test('get note name', () => {
     const notes = [
       {name: 'B#', note: MusicNote.instance('B#')},

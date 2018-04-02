@@ -37,7 +37,7 @@ class Gitar extends Component {
     }
 
     handleNoteSelection(note) {
-      this.selectedNote = note;
+      this.selectedNote = note.displayName.length === 3 ? MusicNote.instance(note.name) : note;
       this.setState({selectedNote: this.selectedNote});
       this.updateNeck()
     }
