@@ -11,18 +11,30 @@ class Gitar extends Component {
       super()
 
       this.renameNotes = true;
-      this.selectedNote = null;
+      this._selectedNote = null;
       this.selectedInterval = null
       this._selectedIntervals = []
       this.selectedIntervalNotes = []
 
       this.state = {
-        selectedNote: this.selectedNote,
+        selectedNote: this._selectedNote,
         selectedInterval: this.selectedInterval,
         selectedScale: this.selectedScale,
         selectedIntervals: this.selectedIntervals,
         selectedIntervalNotes: this.selectedIntervalNotes,
       };
+    }
+
+    set selectedNote(note) {
+      if (note.displayName.length === 3) {
+        this._selectedNote = MusicNote.instance(note.name);
+      } else {
+        this._selectedNote = note;
+      }
+    }
+
+    get selectedNote() {
+      return this._selectedNote;
     }
 
     set selectedIntervals(intervals) {
@@ -37,7 +49,7 @@ class Gitar extends Component {
     }
 
     handleNoteSelection(note) {
-      this.selectedNote = note.displayName.length === 3 ? MusicNote.instance(note.name) : note;
+      this.selectedNote = note;
       this.setState({selectedNote: this.selectedNote});
       this.updateNeck()
     }
