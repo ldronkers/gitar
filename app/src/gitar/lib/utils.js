@@ -4,12 +4,10 @@
 *
 *  Example:
 *  input = [a, b, c, d, e, f, g]
-*  from point 'c', it will return [d, e, f, g, a, b, c]
+*  from point 'c', it will return [c, d, e, f, g, a, b]
 *
 *  @values the array to goround
-*  @position the position to start from. Note this is not the
-*            index but as we see it (index+1)
-*
+*  @position the index position to start from
 */
 export function goRound(values = [], position) {
   const max = values.length;
