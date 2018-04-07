@@ -102,8 +102,6 @@ class MusicNote {
     return MusicNote.instance(noteNames[interval.shortName.match(/[1-9]/) -1]); // refactor
   }
 
-  // ESS: new MusicNote(6, 'Gb', 'E##'),
-  // Notes sharp, but name is Gb causing 111 to be -1 still
   getAllIntervalNames() {
     const match = this.displayName.match(/b/);
     const notes = match ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
@@ -114,9 +112,9 @@ class MusicNote {
 
   getIntervalNotes(intervals, rename=true) {
     let result = []
-    intervals.map((interval, index) => (
+    for(let interval of intervals) {
       result.push(this.getNote(interval, rename))
-    ));
+    }
     return result;
   }
 

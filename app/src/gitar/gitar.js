@@ -71,6 +71,14 @@ class Gitar extends Component {
 
     handleNoteTypes(e) {
       this.setState({show: e.target.text});
+      // if (this.selectedNote) {
+      //   let name = this.selectedNote.displayName;
+      //   if (e.target.text === 'flats') {
+      //     name = name.replace('#', 'b').replace('#', 'b');
+      //     this.selectedNote = MusicNote.instance(name);
+      //   }
+      // }
+      // this.updateNeck()
     }
 
     handleRenameNotes(e) {
