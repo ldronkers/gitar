@@ -103,6 +103,32 @@ class MusicScale {
     intervals: MusicScale.MODE_AEOLIAN.intervals
   }
 
+  static HARMONIC_MINOR = {
+    name: 'Harmonic minor',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_2ND,
+      MusicInterval.MIN_3RD,
+      MusicInterval.PER_4TH,
+      MusicInterval.PER_5TH,
+      MusicInterval.MIN_6TH,
+      MusicInterval.MAJ_7TH
+    ]
+  }
+
+  static MELODIC_MINOR = {
+    name: 'Melodic minor',
+    intervals: [
+      MusicInterval.PER_UNI,
+      MusicInterval.MAJ_2ND,
+      MusicInterval.MIN_3RD,
+      MusicInterval.PER_4TH,
+      MusicInterval.PER_5TH,
+      MusicInterval.MAJ_6TH,
+      MusicInterval.MAJ_7TH
+    ]
+  }
+
   static MAJ_TRIAD = {
     name: 'Major triad',
     intervals: [
@@ -171,6 +197,8 @@ class MusicScale {
     return [
       MusicScale.MAJOR,
       MusicScale.NATURAL_MINOR,
+      MusicScale.HARMONIC_MINOR,
+      MusicScale.MELODIC_MINOR,
     ];
   }
 

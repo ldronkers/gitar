@@ -1,4 +1,4 @@
-import { goRound } from './utils';
+import { beginWith } from './utils';
 
 class MusicNote {
 
@@ -96,18 +96,22 @@ class MusicNote {
   }
 
   getExpectedNote(interval) {
-    const notes = MusicNote.NOTE_NAMES;
-    const position = notes.indexOf(this.displayName[0]);
-    const noteNames = goRound(notes, position);
+    const noteNames = beginWith(MusicNote.NOTE_NAMES, this.displayName[0]);
     return MusicNote.instance(noteNames[interval.shortName.match(/[1-9]/) -1]); // refactor
   }
 
   getAllIntervalNames() {
     const match = this.displayName.match(/b/);
     const notes = match ? MusicNote.INTERVAL_NOTES_FLAT : MusicNote.INTERVAL_NOTES_SHARP;
-    let position = notes.indexOf(this.displayName);
-    position = position === -1 ? MusicNote.INTERVAL_NOTES_FLAT.indexOf(this.name) : position;
-    return goRound(notes, position);
+    let result = [];
+
+    if (notes.indexOf(this.displayName) !== -1) {
+      result = beginWith(notes, this.displayName)
+    } else {
+      result = beginWith(MusicNote.INTERVAL_NOTES_FLAT, this.name)
+    }
+
+    return result;
   }
 
   getIntervalNotes(intervals, rename=true) {

@@ -17,3 +17,13 @@ export function goRound(values = [], position) {
     throw new Error('Position not in bounds (min:1, max: index+1)');
   }
 }
+
+export function beginWith(values = [], startingValue) {
+  const max = values.length;
+  const position = values.indexOf(startingValue);
+  if (position !== -1) {
+    return position > 0 ? values.slice(position, max + 1).concat(values.slice(0, position)) : values;
+  } else {
+    throw new Error(`Value '${startingValue}' not found in values: ${values}'`);
+  }
+}
